@@ -43,9 +43,9 @@ function App() {
           className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-secondary/10 blur-[150px] rounded-full"
         />
 
-        {/* Floating Particles Section */}
+        {/* Floating Particles Section - Reduced for Performance on Mobile */}
         <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(typeof window !== 'undefined' && window.innerWidth < 768 ? 10 : 30)].map((_, i) => (
             <motion.div
               key={i}
               initial={{ 
@@ -54,11 +54,11 @@ function App() {
                 opacity: Math.random() * 0.5
               }}
               animate={{
-                y: [null, "-20px", "20px"],
-                opacity: [0.2, 0.5, 0.2]
+                y: [null, "-30px", "30px"],
+                opacity: [0.1, 0.4, 0.1]
               }}
               transition={{
-                duration: 5 + Math.random() * 5,
+                duration: 8 + Math.random() * 8,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
