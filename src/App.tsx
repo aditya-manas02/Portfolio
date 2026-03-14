@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -6,6 +7,7 @@ import Experience from './components/Experience';
 import Certificates from './components/Certificates';
 import Education from './components/Education';
 import Contact from './components/Contact';
+import formalPic2 from './assets/formal-pic-2.jpg';
 
 function App() {
   return (
@@ -22,11 +24,21 @@ function App() {
         <Hero />
 
         <div id="about" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass p-8 md:p-12 rounded-[3rem] relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-              <img src="/vite.svg" alt="" className="w-64 h-64 grayscale" />
-            </div>
-            <div className="relative z-10">
+          <div className="glass p-8 md:p-12 rounded-[3rem] relative overflow-hidden group flex flex-col md:flex-row items-center gap-12">
+            <motion.div
+              whileHover={{ rotateY: 15, rotateX: -15, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="relative w-48 h-48 md:w-64 md:h-64 flex-shrink-0 cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-3xl" />
+              <img
+                src={formalPic2}
+                alt="Aditya Manas"
+                className="relative z-10 w-full h-full object-cover rounded-3xl border border-white/10 shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-500"
+              />
+            </motion.div>
+
+            <div className="relative z-10 text-center md:text-left">
               <h2 className="text-3xl font-bold mb-6">About <span className="text-gradient">Me</span></h2>
               <p className="text-xl text-gray-400 leading-relaxed max-w-3xl">
                 Bachelor of Technology in Computer Science from <span className="text-white font-semibold">Lovely Professional University</span>.
