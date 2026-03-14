@@ -12,10 +12,60 @@ import formalPic2 from './assets/formal-pic-2.jpg';
 function App() {
   return (
     <div className="min-h-screen bg-background selection:bg-primary/30 text-white">
-      {/* Background Decor */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[10%] left-[-5%] w-[30%] h-[30%] bg-primary/10 blur-[120px] rounded-full animate-pulse-slow" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-secondary/10 blur-[150px] rounded-full animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      {/* Premium Dynamic Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Animated Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.15]" 
+          style={{ 
+            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }} 
+        />
+        
+        {/* Dynamic Glowing Blobs */}
+        <motion.div
+          animate={{
+            x: [0, 100, 0],
+            y: [0, 50, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/10 blur-[120px] rounded-full"
+        />
+        <motion.div
+          animate={{
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-secondary/10 blur-[150px] rounded-full"
+        />
+
+        {/* Floating Particles Section */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={{ 
+                x: Math.random() * 100 + "%", 
+                y: Math.random() * 100 + "%",
+                opacity: Math.random() * 0.5
+              }}
+              animate={{
+                y: [null, "-20px", "20px"],
+                opacity: [0.2, 0.5, 0.2]
+              }}
+              transition={{
+                duration: 5 + Math.random() * 5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
+            />
+          ))}
+        </div>
       </div>
 
       <Navbar />

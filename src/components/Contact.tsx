@@ -5,12 +5,37 @@ import { Mail, Smartphone, Linkedin, Github, Send, MapPin, CheckCircle } from 'l
 const Contact = () => {
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Simulate API call
-        console.log("Form submitted successfully");
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 5000);
+        setIsSubmitting(true);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        formData.append("access_key", "f5d529b9-c6a2-4317-a5a1-98ceef9727f9");
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setSubmitted(true);
+                setTimeout(() => setSubmitted(false), 5000);
+                (e.target as HTMLFormElement).reset();
+            } else {
+                setError(data.message || "Something went wrong. Please try again.");
+            }
+        } catch (err) {
+            setError("Failed to send message. Please check your internet connection.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -101,20 +126,29 @@ const Contact = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium text-gray-400 ml-1">Name</label>
-                                            <input required type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary transition-all" placeholder="John Doe" />
+                                            <input required name="name" type="text" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary transition-all" placeholder="John Doe" />
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium text-gray-400 ml-1">Email</label>
-                                            <input required type="email" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary transition-all" placeholder="john@example.com" />
+                                            <input required name="email" type="email" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary transition-all" placeholder="john@example.com" />
                                         </div>
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-sm font-medium text-gray-400 ml-1">Message</label>
-                                        <textarea required rows={5} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary transition-all resize-none" placeholder="Your message here..." />
+                                        <textarea required name="message" rows={5} className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary transition-all resize-none" placeholder="Your message here..." />
                                     </div>
-                                    <button type="submit" className="w-full py-4 rounded-2xl bg-primary text-white font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2">
-                                        Send Message
-                                        <Send className="w-5 h-5" />
+
+                                    {error && (
+                                        <p className="text-red-500 text-sm ml-1">{error}</p>
+                                    )}
+
+                                    <button 
+                                        type="submit" 
+                                        disabled={isSubmitting}
+                                        className="w-full py-4 rounded-2xl bg-primary text-white font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                    >
+                                        {isSubmitting ? "Sending..." : "Send Message"}
+                                        {!isSubmitting && <Send className="w-5 h-5" />}
                                     </button>
                                 </motion.form>
                             ) : (

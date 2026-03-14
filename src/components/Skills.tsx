@@ -11,7 +11,7 @@ const skills = [
     {
         category: 'Frameworks',
         icon: <Layout className="w-6 h-6" />,
-        items: ['HTML & CSS', 'Node.js', 'React'],
+        items: ['HTML & CSS', 'Node.js', 'React', 'Express.js', 'Laravel'],
         color: 'from-purple-500 to-pink-500',
     },
     {

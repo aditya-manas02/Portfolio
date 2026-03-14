@@ -8,7 +8,7 @@ const education = [
         period: '2023 - Present',
         location: 'Phagwara, Punjab',
         logo: '/lpu_logo_round.png',
-        status: 'CGPA: 6.70',
+        status: 'CGPA: 6.75',
     },
     {
         institution: 'Jeewan Public School',
