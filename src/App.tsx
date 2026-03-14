@@ -23,7 +23,7 @@ function App() {
           }} 
         />
         
-        {/* Dynamic Glowing Blobs */}
+        {/* Dynamic Glowing Blobs - Reduced Blur for Mobile */}
         <motion.div
           animate={{
             x: [0, 100, 0],
@@ -31,7 +31,7 @@ function App() {
             scale: [1, 1.2, 1],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/10 blur-[120px] rounded-full"
+          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/10 blur-[60px] md:blur-[120px] rounded-full"
         />
         <motion.div
           animate={{
@@ -40,7 +40,7 @@ function App() {
             scale: [1, 1.3, 1],
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-secondary/10 blur-[150px] rounded-full"
+          className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-secondary/10 blur-[70px] md:blur-[150px] rounded-full"
         />
 
         {/* Floating Particles Section - Reduced for Performance on Mobile */}

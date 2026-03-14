@@ -35,7 +35,13 @@ body {
 }
 
 .glass {
-  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+  @apply bg-white/10 border border-white/10;
+}
+
+@media (min-width: 768px) {
+  .glass {
+    @apply bg-white/5 backdrop-blur-lg;
+  }
 }
 
 .text-gradient {

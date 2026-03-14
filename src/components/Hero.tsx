@@ -136,14 +136,14 @@ const Hero = () => {
                     }}
                     className="relative flex-1 flex justify-center items-center h-[400px] sm:h-[500px] lg:h-[750px] w-full"
                 >
-                    {/* Living Energy Field (Backglow) */}
+                    {/* Living Energy Field (Backglow) - Reduced Blur for Mobile */}
                     <motion.div
                         animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.3, 0.5, 0.3],
+                            scale: [1, 1.1, 1],
+                            opacity: [0.2, 0.4, 0.2],
                         }}
                         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute w-[400px] h-[400px] bg-gradient-to-r from-primary/30 to-secondary/30 blur-[120px] rounded-full"
+                        className="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] bg-gradient-to-r from-primary/20 to-secondary/20 blur-[60px] md:blur-[120px] rounded-full"
                     />
 
                     {/* 3D Character Asset with Organic Masking */}
@@ -173,11 +173,11 @@ const Hero = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
                     </motion.div>
 
-                    {/* Enhanced Dynamic Shadow */}
+                    {/* Enhanced Dynamic Shadow - Optimized for Mobile */}
                     <motion.div 
-                        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+                        animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.4, 0.2] }}
                         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-64 h-12 bg-black/60 blur-3xl rounded-full scale-150"
+                        className="absolute -bottom-16 left-1/2 -track-x-1/2 w-48 h-8 md:w-64 md:h-12 bg-black/60 blur-[40px] md:blur-[80px] rounded-full scale-150"
                     />
 
                     {/* Floating Tech Orbs (Parallax) - Desktop Only */}
