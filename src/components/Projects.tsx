@@ -7,10 +7,10 @@ const projects = [
         subtitle: 'AI-Powered Music Curation',
         description: 'An AI-driven web application that curates personalized music playlists based on the user\'s current mood. Built with a focus on speed and modern DX.',
         tech: ['React', 'TypeScript', 'Bun', 'Tailwind CSS', 'Vite'],
-        link: 'https://github.com/aditya-manas02/emotion-beat-curator-bot',
+        link: 'https://emotion-beat-curator-bot.vercel.app/',
         github: 'https://github.com/aditya-manas02/emotion-beat-curator-bot',
         image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800',
-        live: false,
+        live: true,
     },
     {
         title: 'SafetyWatch',
