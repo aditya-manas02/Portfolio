@@ -19,7 +19,7 @@ const projects = [
         title: 'SafetyWatch',
         subtitle: 'Security Platform',
         description: 'Community security platform with real-time alerting and JWT auth.',
-        tech: ['Node', 'Express', 'MongoDB'],
+        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind', 'JWT'],
         link: 'https://safetywatch.vercel.app',
         github: 'https://github.com/aditya-manas02/safetywatch-frontend',
         image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=800',
