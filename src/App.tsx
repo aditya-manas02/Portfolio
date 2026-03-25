@@ -1,4 +1,6 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -10,105 +12,113 @@ import Contact from './components/Contact';
 import formalPic2 from './assets/formal-pic-2.jpg';
 
 function App() {
-  return (
-    <div className="min-h-screen bg-background selection:bg-primary/30 text-white">
-      {/* Premium Dynamic Background */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Animated Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.15]" 
-          style={{ 
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} 
-        />
-        
-        {/* Dynamic Glowing Blobs - Reduced Blur for Mobile */}
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, 50, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-primary/10 blur-[60px] md:blur-[120px] rounded-full"
-        />
-        <motion.div
-          animate={{
-            x: [0, -100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[-10%] right-[-10%] w-[70%] h-[70%] bg-secondary/10 blur-[70px] md:blur-[150px] rounded-full"
-        />
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-        {/* Floating Particles Section - Reduced for Performance on Mobile */}
-        <div className="absolute inset-0">
-          {[...Array(typeof window !== 'undefined' && window.innerWidth < 768 ? 10 : 30)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ 
-                x: Math.random() * 100 + "%", 
-                y: Math.random() * 100 + "%",
-                opacity: Math.random() * 0.5
-              }}
-              animate={{
-                y: [null, "-30px", "30px"],
-                opacity: [0.1, 0.4, 0.1]
-              }}
-              transition={{
-                duration: 8 + Math.random() * 8,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="absolute w-1 h-1 bg-white rounded-full blur-[1px]"
-            />
-          ))}
-        </div>
-      </div>
+  const lenisRef = useRef<Lenis | null>(null);
+
+  useEffect(() => {
+    // Advanced safety check for window and Lenis
+    if (typeof window === 'undefined') return;
+
+    try {
+        const lenis = new Lenis({
+            duration: 1.5,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+        });
+
+        lenisRef.current = lenis;
+
+        function raf(time: number) {
+            if (lenisRef.current) {
+                lenisRef.current.raf(time);
+                requestAnimationFrame(raf);
+            }
+        }
+
+        requestAnimationFrame(raf);
+
+        return () => {
+            lenis.destroy();
+            lenisRef.current = null;
+        };
+    } catch (err) {
+        console.error("Lenis initialization skipped due to error:", err);
+    }
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-[#020617] selection:bg-primary/30 text-white overflow-x-hidden font-inter antialiased">
+      {/* Premium Progress Bar */}
+      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary origin-left z-[10001]" style={{ scaleX }} />
+
+      <div className="noise-overlay" />
 
       <Navbar />
 
-      <main>
+      <main className="relative z-10">
         <Hero />
 
-        <div id="about" className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="glass p-8 md:p-12 rounded-[3rem] relative overflow-hidden group flex flex-col md:flex-row items-center gap-12">
-            <motion.div
-              whileHover={{ rotateY: 15, rotateX: -15, scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="relative w-48 h-48 md:w-64 md:h-64 flex-shrink-0 cursor-pointer"
-            >
-              <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-3xl" />
-              <img
-                src={formalPic2}
-                alt="Aditya Manas"
-                className="relative z-10 w-full h-full object-cover rounded-3xl border border-white/10 shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-500"
-              />
-            </motion.div>
+        {/* About Section */}
+        <section id="about" className="py-40 max-w-7xl mx-auto px-6 lg:px-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="glass-heavy p-10 md:p-24 rounded-[3.5rem] relative overflow-hidden flex flex-col lg:flex-row items-center gap-16"
+          >
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-            <div className="relative z-10 text-center md:text-left">
-              <h2 className="text-3xl font-bold mb-6">About <span className="text-gradient">Me</span></h2>
-              <p className="text-xl text-gray-400 leading-relaxed max-w-3xl">
-                Bachelor of Technology in Computer Science from <span className="text-white font-semibold">Lovely Professional University</span>.
-                My journey is defined by a relentless drive to solve real-world problems through code.
-                From community safety platforms to tree plantation initiatives, I build applications that matter.
-              </p>
+            <div className="relative w-64 h-64 md:w-[400px] md:h-[400px] flex-shrink-0">
+               <div className="absolute inset-0 bg-primary/10 blur-[80px] opacity-20 rounded-full animate-pulse" />
+               <motion.div 
+                 whileHover={{ scale: 1.05 }}
+                 className="relative z-10 w-full h-full rounded-[3rem] overflow-hidden border border-white/5 shadow-2xll"
+               >
+                 <img
+                   src={formalPic2}
+                   alt="Aditya Manas"
+                   className="w-full h-full object-cover transition-all duration-1000"
+                 />
+               </motion.div>
             </div>
-          </div>
-        </div>
+
+            <div className="text-center lg:text-left flex-1 relative z-10">
+               <h2 className="text-4xl md:text-7xl font-black mb-8 tracking-tighter uppercase leading-tight italic">
+                    Creative <span className="text-secondary tracking-normal">Engineering</span>
+               </h2>
+              
+              <div className="text-xl md:text-2xl text-gray-400 leading-relaxed max-w-3xl font-light mb-10 tracking-tight">
+                   Bringing ideas to life through high-performance software and immersive designs.
+              </div>
+
+              <div className="flex justify-center lg:justify-start">
+                  <a href="#projects" className="px-10 py-4 bg-white text-black rounded-full font-black uppercase tracking-tighter text-xs hover:scale-110 active:scale-95 transition-all shadow-xl">
+                      Explore Works
+                  </a>
+              </div>
+            </div>
+          </motion.div>
+        </section>
 
         <Skills />
         <Projects />
-        <Education />
         <Experience />
+        <Education />
         <Certificates />
         <Contact />
       </main>
 
-      <footer className="py-12 border-t border-white/5 text-center text-gray-500">
-        <p>© {new Date().getFullYear()} Aditya Manas. Built with React & Framer Motion.</p>
+      <footer className="py-24 border-t border-white/5 text-center relative z-10 bg-[#020617]">
+        <div className="max-w-7xl mx-auto px-6">
+           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600">© 2026 Aditya Manas • World-Class Portfolio</p>
+        </div>
       </footer>
     </div>
   );

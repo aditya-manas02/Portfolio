@@ -16,6 +16,7 @@ const experiences = [
         title: 'BinaryBlitz Hackathon',
         organization: 'Participant',
         period: 'March 2024',
+        achievement: '🏆 Achieved Top 10 out of 300 Teams',
         description: 'Collaborated with a team to solve complex problems under time constraints.',
         icon: <Award className="w-5 h-5" />,
     },
@@ -24,6 +25,7 @@ const experiences = [
         title: 'CodeOffDuty Hackathon',
         organization: 'Participant',
         period: 'March 2024',
+        achievement: '🏆 Achieved Top 15 out of 200 Teams',
         description: 'Engaged in competitive coding and creative problem solving.',
         icon: <Award className="w-5 h-5" />,
     },
@@ -81,6 +83,14 @@ const Experience = () => {
                                         <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 group-hover:text-gray-200 transition-colors">
                                             {exp.description}
                                         </p>
+
+                                        {exp.achievement && (
+                                            <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/30 rounded-full shadow-[0_0_20px_rgba(234,179,8,0.15)] group-hover:shadow-[0_0_25px_rgba(234,179,8,0.3)] transition-all">
+                                                <span className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 tracking-wide">
+                                                    {exp.achievement}
+                                                </span>
+                                            </div>
+                                        )}
 
                                         {exp.tech && (
                                             <div className="flex flex-wrap gap-2">
