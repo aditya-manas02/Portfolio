@@ -44,12 +44,21 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                <a 
-                    href="#contact"
-                    className="hidden md:block text-sm font-medium text-accent hover:text-blue-700 transition-colors"
-                >
-                    Let's Talk
-                </a>
+                <div className="hidden md:flex items-center gap-4">
+                    <a 
+                        href="#contact"
+                        className="text-sm font-medium text-secondary hover:text-primary transition-colors px-2"
+                    >
+                        Let's Talk
+                    </a>
+                    <a 
+                        href="/resume.pdf"
+                        target="_blank"
+                        className="text-sm font-semibold text-white bg-primary px-4 py-2 rounded-full hover:bg-accent transition-colors shadow-md hover:shadow-accent/30"
+                    >
+                        Resume
+                    </a>
+                </div>
 
                 {/* Mobile Menu Button */}
                 <button 

@@ -1,13 +1,14 @@
-import { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ArrowUpRight } from 'lucide-react';
 
-const projects = [
+const allProjects = [
     {
         title: 'Emotion curator',
         subtitle: 'AI Mood Engine',
         description: 'AI-driven music curation based on mood. High performance React stack.',
         tech: ['React', 'TypeScript', 'Bun', 'Vite'],
+        category: 'Full Stack',
         link: 'https://emotion-beat-curator-bot.vercel.app/',
         github: 'https://github.com/aditya-manas02/emotion-beat-curator-bot',
         image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800',
@@ -17,7 +18,8 @@ const projects = [
         title: 'SafetyWatch',
         subtitle: 'Security Platform',
         description: 'Community security platform with real-time alerting and JWT auth.',
-        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+        tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+        category: 'Full Stack',
         link: 'https://safetywatch.vercel.app',
         github: 'https://github.com/aditya-manas02/safetywatch-frontend',
         image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=800',
@@ -28,6 +30,7 @@ const projects = [
         subtitle: 'Eco Solution',
         description: 'Platform connecting entities for massive tree plantation drives.',
         tech: ['PHP', 'MySQL', 'Tailwind'],
+        category: 'Backend',
         link: 'https://github.com/aditya-manas02/greenconnect',
         github: 'https://github.com/aditya-manas02/greenconnect',
         image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800',
@@ -35,14 +38,17 @@ const projects = [
     },
 ];
 
-const ProjectCard = ({ project, index }: { project: any, index: number }) => {
+const categories = ['All', 'Full Stack', 'Backend'];
+
+const ProjectCard = ({ project }: { project: any }) => {
     return (
         <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative snap-center shrink-0 w-[85vw] sm:w-[450px] lg:w-[500px]"
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.4 }}
+            className="group relative w-full"
         >
             <div className="luxury-card relative h-[500px] sm:h-[600px] w-full overflow-hidden flex flex-col justify-between">
                 
@@ -53,7 +59,6 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    {/* Soft inset shadow overlay */}
                     <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.05)] pointer-events-none" />
                 </div>
 
@@ -110,29 +115,54 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
 };
 
 const Projects = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
+    const [activeTab, setActiveTab] = useState('All');
+
+    const filteredProjects = allProjects.filter(
+        (project) => activeTab === 'All' || project.category === activeTab
+    );
 
     return (
-        <section id="projects" ref={containerRef} className="py-32 relative overflow-hidden z-10">
+        <section id="projects" className="py-32 relative overflow-hidden z-10">
             
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10">
                 <div className="flex flex-col md:flex-row justify-between items-end gap-6 pb-6 border-b border-zinc-200">
                     <div>
                         <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-primary">Selected Works</h2>
                     </div>
-                    <div className="text-secondary text-sm font-medium uppercase tracking-widest">
-                        Case Studies
+                    
+                    {/* Interactive Filter Tabs */}
+                    <div className="flex bg-zinc-100 p-1.5 rounded-full">
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() => setActiveTab(category)}
+                                className={`relative px-5 py-2 text-sm font-medium rounded-full transition-colors ${
+                                    activeTab === category ? 'text-primary' : 'text-secondary hover:text-primary'
+                                }`}
+                            >
+                                {activeTab === category && (
+                                    <motion.div
+                                        layoutId="activeTabIndicator"
+                                        className="absolute inset-0 bg-white rounded-full shadow-sm"
+                                        initial={false}
+                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{category}</span>
+                            </button>
+                        ))}
                     </div>
                 </div>
             </div>
 
-            <div className="relative w-full z-10">
-                <div className="flex gap-8 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 lg:px-8 pb-16 pt-4 hide-scrollbar">
-                    {projects.map((project, index) => (
-                        <ProjectCard key={project.title} project={project} index={index} />
-                    ))}
-                    <div className="snap-center shrink-0 w-[4vw] md:w-[10vw]" />
-                </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <AnimatePresence mode="popLayout">
+                        {filteredProjects.map((project) => (
+                            <ProjectCard key={project.title} project={project} />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
             </div>
         </section>
     );
