@@ -38,8 +38,8 @@ const Certificates = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Honors & <span className="text-gradient">Certificates</span></h2>
-                    <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Honors & <span className="text-[#ccff00]">Certificates</span></h2>
+                    <div className="w-20 h-1.5 bg-[#ccff00] text-black mx-auto rounded-full" />
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -51,7 +51,7 @@ const Certificates = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             whileHover={{ y: -5 }}
-                            className="glass p-6 rounded-3xl group flex flex-col h-full"
+                            className="brutalist-border bg-black p-6 rounded-3xl group flex flex-col h-full"
                         >
                             <div className="p-3 rounded-2xl bg-secondary/10 text-secondary w-fit mb-4 group-hover:bg-secondary/20 transition-all">
                                 <ShieldCheck className="w-6 h-6" />
@@ -65,7 +65,7 @@ const Certificates = () => {
                                 href={cert.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-between px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm font-semibold hover:bg-primary hover:border-primary transition-all transition-colors"
+                                className="flex items-center justify-between px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm font-semibold hover:bg-[#ccff00] text-black hover:border-primary transition-all transition-colors"
                             >
                                 Verify
                                 <ExternalLink className="w-4 h-4" />

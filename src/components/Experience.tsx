@@ -41,8 +41,8 @@ const Experience = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Journey & <span className="text-gradient">Experience</span></h2>
-                    <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Journey & <span className="text-[#ccff00]">Experience</span></h2>
+                    <div className="w-20 h-1.5 bg-[#ccff00] text-black mx-auto rounded-full" />
                 </motion.div>
 
                 <div className="relative">
@@ -53,26 +53,26 @@ const Experience = () => {
                         {experiences.map((exp, index) => (
                             <div key={index} className="relative flex flex-col md:flex-row items-center">
                                 {/* Timeline Dot Desktop */}
-                                <div className="absolute left-1/2 w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(14,165,233,0.8)] z-10 -translate-x-1/2 hidden md:block" />
+                                <div className="absolute left-1/2 w-4 h-4 rounded-full bg-[#ccff00] text-black shadow-[0_0_15px_rgba(14,165,233,0.8)] z-10 -translate-x-1/2 hidden md:block" />
 
                                 <div className={`w-full md:w-1/2 flex ${index % 2 === 0 ? 'md:justify-end md:pr-16' : 'md:justify-start md:pl-16 md:ml-auto'}`}>
                                     <motion.div
                                         initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        className="glass p-6 sm:p-8 rounded-[2rem] w-full hover:bg-white/[0.08] transition-all group relative border-white/10 ml-8 md:ml-0"
+                                        className="brutalist-border bg-black p-6 sm:p-8 rounded-[2rem] w-full hover:bg-white/[0.08] transition-all group relative border-white/10 ml-8 md:ml-0"
                                     >
                                         {/* Mobile Dot */}
-                                        <div className="absolute top-10 -left-[22px] w-3 h-3 rounded-full bg-primary md:hidden ring-4 ring-primary/20" />
+                                        <div className="absolute top-10 -left-[22px] w-3 h-3 rounded-full bg-[#ccff00] text-black md:hidden ring-4 ring-primary/20" />
 
                                         <div className="flex items-center gap-3 mb-4">
-                                            <div className="p-2 rounded-xl bg-primary/20 text-primary group-hover:scale-110 transition-transform">
+                                            <div className="p-2 rounded-xl bg-[#ccff00] text-black/20 text-[#ccff00] group-hover:scale-110 transition-transform">
                                                 {exp.icon}
                                             </div>
-                                            <span className="text-xs font-bold text-primary uppercase tracking-widest">{exp.type}</span>
+                                            <span className="text-xs font-bold text-[#ccff00] uppercase tracking-widest">{exp.type}</span>
                                         </div>
 
-                                        <h3 className="text-xl sm:text-2xl font-bold mb-1 text-white group-hover:text-primary transition-colors">{exp.title}</h3>
+                                        <h3 className="text-xl sm:text-2xl font-bold mb-1 text-white group-hover:text-[#ccff00] transition-colors">{exp.title}</h3>
                                         <p className="text-gray-300 font-semibold mb-3 text-sm sm:text-base">{exp.organization}</p>
 
                                         <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 bg-white/5 py-1 px-3 rounded-lg w-fit">
@@ -94,7 +94,7 @@ const Experience = () => {
 
                                         {exp.tech && (
                                             <div className="flex flex-wrap gap-2">
-                                                <span className="px-4 py-1.5 rounded-xl bg-primary/10 text-[10px] font-bold text-primary border border-primary/20">
+                                                <span className="px-4 py-1.5 rounded-xl bg-[#ccff00] text-black/10 text-[10px] font-bold text-[#ccff00] border border-primary/20">
                                                     {exp.tech}
                                                 </span>
                                             </div>

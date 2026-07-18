@@ -47,8 +47,8 @@ const Contact = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Get in <span className="text-gradient">Touch</span></h2>
-                    <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Get in <span className="text-[#ccff00]">Touch</span></h2>
+                    <div className="w-20 h-1.5 bg-[#ccff00] text-black mx-auto rounded-full" />
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -59,34 +59,34 @@ const Contact = () => {
                         viewport={{ once: true }}
                         className="space-y-8"
                     >
-                        <h3 className="text-3xl font-bold mb-6">Let's build something <span className="text-primary">extraordinary</span> together.</h3>
+                        <h3 className="text-3xl font-bold mb-6">Let's build something <span className="text-[#ccff00]">extraordinary</span> together.</h3>
                         <p className="text-gray-400 text-lg leading-relaxed">
                             I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.
                         </p>
 
                         <div className="space-y-6">
                             <div className="flex items-center gap-4 group">
-                                <div className="p-4 rounded-2xl glass group-hover:bg-primary/20 transition-all text-primary">
+                                <div className="p-4 rounded-2xl brutalist-border bg-black group-hover:bg-[#ccff00] text-black/20 transition-all text-[#ccff00]">
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-500">Email</p>
-                                    <a href="mailto:manasaditya7907@gmail.com" className="text-lg font-semibold hover:text-primary transition-colors">manasaditya7907@gmail.com</a>
+                                    <a href="mailto:manasaditya7907@gmail.com" className="text-lg font-semibold hover:text-[#ccff00] transition-colors">manasaditya7907@gmail.com</a>
                                 </div>
                             </div>
 
                             <div className="flex items-center gap-4 group">
-                                <div className="p-4 rounded-2xl glass group-hover:bg-primary/20 transition-all text-primary">
+                                <div className="p-4 rounded-2xl brutalist-border bg-black group-hover:bg-[#ccff00] text-black/20 transition-all text-[#ccff00]">
                                     <Smartphone className="w-6 h-6" />
                                 </div>
                                 <div>
                                     <p className="text-sm text-gray-500">Phone</p>
-                                    <a href="tel:+919135480157" className="text-lg font-semibold hover:text-primary transition-colors">+91-9135480157</a>
+                                    <a href="tel:+919135480157" className="text-lg font-semibold hover:text-[#ccff00] transition-colors">+91-9135480157</a>
                                 </div>
                             </div>
 
                             <div className="flex items-center gap-4 group">
-                                <div className="p-4 rounded-2xl glass group-hover:bg-primary/20 transition-all text-primary">
+                                <div className="p-4 rounded-2xl brutalist-border bg-black group-hover:bg-[#ccff00] text-black/20 transition-all text-[#ccff00]">
                                     <MapPin className="w-6 h-6" />
                                 </div>
                                 <div>
@@ -97,10 +97,10 @@ const Contact = () => {
                         </div>
 
                         <div className="flex gap-4 pt-6">
-                            <a href="https://linkedin.com/in/adityamanas08/" target="_blank" className="p-4 rounded-2xl glass hover:bg-white/10 transition-all">
+                            <a href="https://linkedin.com/in/adityamanas08/" target="_blank" className="p-4 rounded-2xl brutalist-border bg-black hover:bg-white/10 transition-all">
                                 <Linkedin className="w-6 h-6" />
                             </a>
-                            <a href="https://github.com/aditya-manas02" target="_blank" className="p-4 rounded-2xl glass hover:bg-white/10 transition-all">
+                            <a href="https://github.com/aditya-manas02" target="_blank" className="p-4 rounded-2xl brutalist-border bg-black hover:bg-white/10 transition-all">
                                 <Github className="w-6 h-6" />
                             </a>
                         </div>
@@ -111,7 +111,7 @@ const Contact = () => {
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="glass p-6 sm:p-8 md:p-12 rounded-[2.5rem] relative"
+                        className="brutalist-border bg-black p-6 sm:p-8 md:p-12 rounded-[2.5rem] relative"
                     >
                         <AnimatePresence mode="wait">
                             {!submitted ? (
@@ -145,7 +145,7 @@ const Contact = () => {
                                     <button 
                                         type="submit" 
                                         disabled={isSubmitting}
-                                        className="w-full py-4 rounded-2xl bg-primary text-white font-bold text-lg hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full py-4 rounded-2xl bg-[#ccff00] text-black text-white font-bold text-lg hover:bg-[#ccff00] text-black/90 transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? "Sending..." : "Send Message"}
                                         {!isSubmitting && <Send className="w-5 h-5" />}
@@ -165,7 +165,7 @@ const Contact = () => {
                                     <p className="text-gray-400">Thank you for reaching out. I'll get back to you soon.</p>
                                     <button
                                         onClick={() => setSubmitted(false)}
-                                        className="text-primary font-semibold hover:underline"
+                                        className="text-[#ccff00] font-semibold hover:underline"
                                     >
                                         Send another message
                                     </button>

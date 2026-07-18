@@ -29,7 +29,7 @@ const Navbar = () => {
         <nav
             className={cn(
                 'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
-                scrolled ? 'glass py-4' : 'bg-transparent py-6 border-transparent'
+                scrolled ? 'brutalist-border bg-black py-4' : 'bg-transparent py-6 border-transparent'
             )}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +39,7 @@ const Navbar = () => {
                         animate={{ opacity: 1, x: 0 }}
                         className="flex-shrink-0"
                     >
-                        <a href="#" className="text-2xl font-bold text-gradient">
+                        <a href="#" className="text-2xl font-bold text-[#ccff00]">
                             Aditya.
                         </a>
                     </motion.div>
@@ -53,7 +53,7 @@ const Navbar = () => {
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="text-gray-300 hover:text-primary transition-colors text-sm font-medium"
+                                    className="text-gray-300 hover:text-[#ccff00] transition-colors text-sm font-medium"
                                 >
                                     {link.name}
                                 </motion.a>
@@ -65,7 +65,7 @@ const Navbar = () => {
                                 whileTap={{ scale: 0.95 }}
                                 href="/AdityaManasCV1.pdf"
                                 download
-                                className="flex items-center gap-2 px-5 py-2 rounded-full bg-primary text-white font-semibold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                                className="flex items-center gap-2 px-5 py-2 rounded-full bg-[#ccff00] text-black text-white font-semibold hover:bg-[#ccff00] text-black/90 transition-all shadow-lg shadow-primary/20"
                             >
                                 <Download className="w-4 h-4" />
                                 Resume
@@ -77,7 +77,7 @@ const Navbar = () => {
                         <a
                             href="/AdityaManasCV1.pdf"
                             download
-                            className="p-2 rounded-full bg-primary text-white"
+                            className="p-2 rounded-full bg-[#ccff00] text-black text-white"
                         >
                             <Download className="w-4 h-4" />
                         </a>
@@ -97,7 +97,7 @@ const Navbar = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden glass"
+                        className="md:hidden brutalist-border bg-black"
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navLinks.map((link) => (
@@ -105,7 +105,7 @@ const Navbar = () => {
                                     key={link.name}
                                     href={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-primary hover:bg-white/10 rounded-md transition-all"
+                                    className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-[#ccff00] hover:bg-white/10 rounded-md transition-all"
                                 >
                                     {link.name}
                                 </a>

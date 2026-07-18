@@ -1,129 +1,73 @@
 import { motion } from 'framer-motion';
-import { Code2, Database, Layout, Terminal } from 'lucide-react';
-import { cn } from '../lib/utils';
 
-const skills = [
+const skillCategories = [
     {
         category: 'Languages',
-        icon: <Code2 className="w-6 h-6 text-white" />,
-        items: [
-            { name: 'C++', slug: 'cplusplus' },
-            { name: 'Python', slug: 'python' },
-            { name: 'JavaScript', slug: 'javascript' },
-            { name: 'C', slug: 'c' },
-            { name: 'Java', slug: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
-            { name: 'PHP', slug: 'php' },
-            { name: 'TypeScript', slug: 'typescript' },
-            { name: 'SQL', slug: 'mysql' },
-        ],
-        color: 'from-blue-600 to-cyan-500',
+        items: ['C++', 'Python', 'JavaScript', 'C', 'Java', 'PHP', 'TypeScript', 'SQL']
     },
     {
         category: 'Frameworks',
-        icon: <Layout className="w-6 h-6 text-white" />,
-        items: [
-            { name: 'React', slug: 'react' },
-            { name: 'Node.js', slug: 'nodedotjs' },
-            { name: 'Express', slug: 'express' },
-            { name: 'Next.js', slug: 'nextdotjs' },
-            { name: 'Tailwind', slug: 'tailwindcss' },
-            { name: 'Laravel', slug: 'laravel' },
-            { name: 'Bootstrap', slug: 'bootstrap' },
-            { name: 'Framer', slug: 'framer' },
-        ],
-        color: 'from-purple-600 to-pink-500',
+        items: ['React', 'Node.js', 'Express', 'Next.js', 'Tailwind', 'Laravel', 'Bootstrap', 'Framer']
     },
     {
         category: 'Databases & OS',
-        icon: <Database className="w-6 h-6 text-white" />,
-        items: [
-            { name: 'MySQL', slug: 'mysql' },
-            { name: 'MongoDB', slug: 'mongodb' },
-            { name: 'PostgreSQL', slug: 'postgresql' },
-            { name: 'Firebase', slug: 'firebase' },
-            { name: 'Linux', slug: 'linux' },
-            { name: 'Ubuntu', slug: 'ubuntu' },
-            { name: 'Windows', slug: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/windows8/windows8-original.svg' },
-            { name: 'Android', slug: 'android' },
-        ],
-        color: 'from-green-600 to-emerald-500',
+        items: ['MySQL', 'MongoDB', 'PostgreSQL', 'Firebase', 'Linux', 'Ubuntu', 'Windows', 'Android']
     },
     {
         category: 'Tools & Platforms',
-        icon: <Terminal className="w-6 h-6 text-white" />,
-        items: [
-            { name: 'Git', slug: 'git' },
-            { name: 'GitHub', slug: 'github' },
-            { name: 'VS Code', slug: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg' },
-            { name: 'Vercel', slug: 'vercel' },
-            { name: 'Postman', slug: 'postman' },
-            { name: 'Render', slug: 'render' },
-            { name: 'Canva', slug: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg' },
-            { name: 'Figma', slug: 'figma' },
-        ],
-        color: 'from-orange-600 to-red-500',
-    },
+        items: ['Git', 'GitHub', 'VS Code', 'Vercel', 'Postman', 'Render', 'Canva', 'Figma']
+    }
 ];
 
 const Skills = () => {
     return (
         <section id="skills" className="py-24 relative overflow-hidden bg-background">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            {/* Massive Marquee */}
+            <div className="w-full bg-[#ccff00] text-black border-y-4 border-white py-4 overflow-hidden transform -rotate-2 scale-110 relative z-10">
+                <div className="flex animate-marquee gap-8 whitespace-nowrap">
+                    {[...Array(6)].map((_, i) => (
+                        <span key={i} className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
+                            TECHNICAL_ARSENAL // NO_COMPROMISE // 
+                        </span>
+                    ))}
+                </div>
+            </div>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Technical <span className="text-gradient">Arsenal</span></h2>
-                    <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
-                </motion.div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {skills.map((skill, index) => (
-                        <motion.div
-                            key={skill.category}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="glass p-8 rounded-[2rem] relative group border border-white/5 hover:border-white/10 transition-all duration-500 shadow-xl"
-                        >
-                            <div className={cn(
-                                "w-14 h-14 rounded-2xl flex items-center justify-center mb-8 bg-gradient-to-br transition-all duration-500 group-hover:scale-110 shadow-2xl",
-                                skill.color
-                            )}>
-                                {skill.icon}
+                    {skillCategories.map((group, idx) => (
+                        <div key={group.category} className="flex flex-col">
+                            <div className="flex items-end justify-between border-b-2 border-white/20 pb-2 mb-6">
+                                <h3 className="text-2xl font-black uppercase tracking-widest text-white">
+                                    {group.category}
+                                </h3>
+                                <span className="font-mono-tech text-xs text-[#ccff00]">
+                                    [SYS_{idx + 1}]
+                                </span>
                             </div>
-                            <h3 className="text-xl font-bold mb-6 tracking-tight text-white/90">{skill.category}</h3>
-                            <div className="grid grid-cols-2 gap-2.5">
-                                {skill.items.map((item) => (
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {group.items.map((item, itemIdx) => (
                                     <div
-                                        key={item.name}
-                                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:bg-white/[0.08] hover:border-white/20 transition-all group/item cursor-default"
+                                        key={item}
+                                        className="font-mono-tech text-sm text-white/70 hover:text-[#ccff00] hover:translate-x-1 transition-all duration-300 cursor-default flex items-center gap-2"
                                     >
-                                        <div className="w-10 h-10 mb-3 flex items-center justify-center bg-white/95 rounded-lg shadow-[0_0_15px_rgba(255,255,255,0.1)] p-2 group-hover/item:scale-110 group-hover/item:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300">
-                                            <img 
-                                                src={item.slug.startsWith('http') ? item.slug : `https://cdn.simpleicons.org/${item.slug}`} 
-                                                alt={item.name}
-                                                className="w-full h-full object-contain"
-                                                loading="lazy"
-                                                onError={(e) => {
-                                                    // Hide broken images or use a fallback
-                                                    (e.target as HTMLImageElement).parentElement?.classList.add('hidden');
-                                                }}
-                                            />
-                                        </div>
-                                        <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400 group-hover/item:text-white transition-colors text-center leading-tight">
-                                            {item.name}
-                                        </span>
+                                        <span className="text-white/20 text-[10px]">{(itemIdx + 1).toString().padStart(2, '0')}</span>
+                                        {item}
                                     </div>
                                 ))}
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
-                </div>
+                </motion.div>
             </div>
+            
+            {/* Background Grid Pattern is inherited from App.tsx globals */}
         </section>
     );
 };
