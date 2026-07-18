@@ -30,46 +30,50 @@ const certificates = [
 
 const Certificates = () => {
     return (
-        <section id="certificates" className="py-24 bg-background relative overflow-hidden border-t-2 border-white/20">
+        <section id="certificates" className="py-24 relative overflow-hidden z-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-left mb-16 border-b-4 border-white pb-6"
+                    className="text-center mb-16"
                 >
-                    <span className="font-mono-tech text-[#ccff00] text-sm tracking-widest block mb-2">/* SECURE_CERT_STORE */</span>
-                    <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter">Honors</h2>
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                        Honors & <span className="text-white/40">Certificates</span>
+                    </h2>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {certificates.map((cert, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, scale: 0.9 }}
+                            initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            whileHover={{ y: -5 }}
-                            className="brutalist-border bg-black p-6 group flex flex-col h-full hover:bg-white transition-colors"
+                            transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
+                            className="glass-card p-6 flex flex-col h-full group hover:bg-white/[0.04]"
                         >
-                            <div className="p-3 bg-white text-black brutalist-border w-fit mb-6 group-hover:bg-[#ccff00] transition-colors">
-                                <ShieldCheck className="w-8 h-8" />
+                            <div className="p-3 bg-white/5 border border-white/10 rounded-2xl w-fit mb-6 group-hover:bg-white/10 transition-colors">
+                                <ShieldCheck className="w-6 h-6 text-white/80" />
                             </div>
-                            <h3 className="text-lg font-black uppercase tracking-tight mb-4 flex-grow text-white group-hover:text-black line-clamp-3 leading-tight">{cert.title}</h3>
                             
-                            <div className="space-y-2 mb-6 border-l-4 border-[#ccff00] pl-3">
-                                <p className="font-mono-tech text-xs font-bold text-white/70 group-hover:text-black uppercase">ISSUER: {cert.issuer}</p>
-                                <p className="font-mono-tech text-xs text-white/50 group-hover:text-black/70">DATE: {cert.date}</p>
+                            <h3 className="text-lg font-semibold tracking-tight mb-4 flex-grow text-white line-clamp-3 leading-snug">
+                                {cert.title}
+                            </h3>
+                            
+                            <div className="space-y-1 mb-6 pl-3 border-l-2 border-white/10">
+                                <p className="text-sm font-medium text-white/70">{cert.issuer}</p>
+                                <p className="text-xs text-secondary font-light">{cert.date}</p>
                             </div>
 
                             <a
                                 href={cert.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center justify-between px-4 py-3 bg-[#ccff00] text-black font-black uppercase text-sm brutalist-border hover:bg-black hover:text-[#ccff00] transition-colors"
+                                className="flex items-center justify-between px-4 py-3 glass-pill text-white/80 font-medium text-sm hover:text-white hover:bg-white/10 transition-all"
                             >
-                                VERIFY_CERT
+                                Verify Credential
                                 <ExternalLink className="w-4 h-4" />
                             </a>
                         </motion.div>

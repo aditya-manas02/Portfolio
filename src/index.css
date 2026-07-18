@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #ccff00; /* Neon yellow/green */
-  --color-secondary: #ff003c; /* Cyberpunk Red */
-  --color-background: #000000; /* Pitch Black */
-  --color-surface: #111111; /* Slightly lighter black for surfaces */
-  --color-border: #333333; /* Stark gray borders */
+  --color-primary: #ffffff; /* Pure white for primary text/accents */
+  --color-secondary: #a1a1aa; /* Soft zinc for secondary */
+  --color-background: #09090b; /* Deep luxury slate/black */
+  --color-surface: rgba(255, 255, 255, 0.03); /* Barely there glass surface */
+  --color-border: rgba(255, 255, 255, 0.08); /* Subtle glass border */
 }
 
 :root {
@@ -13,76 +13,102 @@
 }
 
 body {
-  @apply bg-background text-white;
+  @apply bg-background text-primary antialiased;
   margin: 0;
-  /* Monospace-heavy or geometric font stack */
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Luxurious, cinematic font stack */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   overflow-x: hidden;
-  cursor: none; /* We will use a custom cursor */
+  cursor: none; /* We will use a smooth custom magnetic cursor */
+  background-color: var(--color-background);
 }
 
-/* Base resets for custom cursor to work on all clickable elements */
+/* Hide cursor on all interactables for our custom cursor */
 a, button, [role="button"], input, select, textarea {
   cursor: none;
 }
 
-/* BRUTALIST UTILITIES */
+/* 
+  GLASS & AIR UTILITIES 
+*/
 
-/* Harsh Grid Background */
-.bg-grid-pattern {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+.glass-card {
+  @apply bg-white/[0.02] border border-white/[0.08] backdrop-blur-2xl rounded-3xl;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Sharp, brutalist borders instead of glassmorphism */
-.brutalist-border {
-  @apply border border-white/20 bg-black;
-  box-shadow: 4px 4px 0px 0px rgba(255,255,255,1);
-  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+.glass-card:hover {
+  @apply bg-white/[0.04] border-white/[0.12];
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
 }
 
-.brutalist-border:hover {
-  box-shadow: 8px 8px 0px 0px var(--color-primary);
-  transform: translate(-4px, -4px);
+.glass-pill {
+  @apply bg-white/[0.05] border border-white/[0.1] backdrop-blur-xl rounded-full;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Marquee text animations */
-@keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee-scroll 15s linear infinite;
-}
-
-/* CRT Scanline Effect */
-.scanlines {
-  position: relative;
-}
-.scanlines::before {
-  content: " ";
-  display: block;
+/* Ambient Background Orbs */
+.ambient-orb {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  z-index: 50;
-  background-size: 100% 2px, 3px 100%;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  z-index: 0;
   pointer-events: none;
+  animation: float 20s infinite ease-in-out alternate;
 }
 
-.vertical-text {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
+.ambient-orb-1 {
+  background: radial-gradient(circle, rgba(99,102,241,0.4) 0%, rgba(99,102,241,0) 70%); /* Indigo glow */
+  width: 60vw;
+  height: 60vw;
+  top: -10vw;
+  left: -10vw;
+  animation-delay: 0s;
 }
 
+.ambient-orb-2 {
+  background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, rgba(168,85,247,0) 70%); /* Purple glow */
+  width: 50vw;
+  height: 50vw;
+  bottom: -10vw;
+  right: -10vw;
+  animation-delay: -5s;
+}
+
+.ambient-orb-3 {
+  background: radial-gradient(circle, rgba(14,165,233,0.3) 0%, rgba(14,165,233,0) 70%); /* Ocean blue glow */
+  width: 40vw;
+  height: 40vw;
+  top: 40%;
+  left: 30%;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(5%, 5%) scale(1.05); }
+  66% { transform: translate(-2%, 8%) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Typography Enhancements */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%); /* Indigo to Purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hide scrollbar for clean UI */
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -91,33 +117,17 @@ a, button, [role="button"], input, select, textarea {
   display: none;
 }
 
-/* Monospace font utility for technical data */
-.font-mono-tech {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace;
-}
-
-/* Glitch effect on hover */
-.glitch-hover:hover {
-  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-  color: var(--color-primary);
-}
-
-@keyframes glitch-skew {
-  0% { transform: skew(0deg); }
-  20% { transform: skew(-20deg); }
-  40% { transform: skew(20deg); }
-  60% { transform: skew(-10deg); }
-  80% { transform: skew(10deg); }
-  100% { transform: skew(0deg); }
-}
-
-/* Custom scrollbar */
+/* Custom scrollbar (Luxurious) */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-black border-l border-white/10;
+  background: var(--color-background);
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-white hover:bg-primary transition-colors;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

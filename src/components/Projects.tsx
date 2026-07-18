@@ -41,58 +41,69 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            className="group relative snap-center shrink-0 w-[85vw] sm:w-[400px] lg:w-[450px]"
+            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="group relative snap-center shrink-0 w-[85vw] sm:w-[450px] lg:w-[500px]"
         >
-            <div className="relative h-[450px] sm:h-[550px] w-full bg-black border-2 border-white/20 brutalist-border overflow-hidden flex flex-col justify-between">
+            <div className="glass-card relative h-[500px] sm:h-[600px] w-full overflow-hidden flex flex-col justify-between group-hover:border-white/20">
                 
-                {/* Tech Bar */}
-                <div className="border-b-2 border-white/20 bg-[#ccff00] overflow-hidden z-10 w-full py-1">
-                    <div className="flex animate-marquee gap-0">
-                        {[...project.tech, ...project.tech, ...project.tech, ...project.tech].map((t: string, i: number) => (
-                            <span key={`${t}-${i}`} className="px-4 py-1 text-black font-mono-tech text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
-                                {t} •
-                            </span>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Image Area */}
-                <div className="relative flex-1 overflow-hidden border-b-2 border-white/20 bg-[#111]">
-                    <img
+                {/* Image Area with luxury zoom */}
+                <div className="relative flex-1 overflow-hidden">
+                    <motion.img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/90" />
                 </div>
 
-                {/* Content */}
-                <div className="p-6 bg-black z-10 relative">
-                    <div className="absolute top-0 right-6 -translate-y-1/2 flex gap-2">
-                        {project.live && (
-                            <a 
-                                href={project.link} 
-                                className="w-12 h-12 bg-white text-black flex items-center justify-center brutalist-border !border-black hover:!bg-[#ccff00]"
-                                target="_blank"
-                            >
-                                <ArrowUpRight className="w-6 h-6" />
-                            </a>
-                        )}
-                        <a href={project.github} target="_blank" className="w-12 h-12 bg-black border-2 border-white text-white flex items-center justify-center hover:bg-white hover:text-black transition-colors">
-                            <Github className="w-6 h-6" />
-                        </a>
-                    </div>
+                {/* Content Area overlay */}
+                <div className="absolute inset-x-0 bottom-0 p-8 z-10 flex flex-col justify-end h-full pointer-events-none">
+                    
+                    <div className="pointer-events-auto w-full">
+                        <div className="flex justify-between items-end w-full mb-4">
+                            <div>
+                                <div className="text-white/60 text-sm font-medium mb-1 tracking-wide uppercase">
+                                    {project.subtitle}
+                                </div>
+                                <h3 className="text-3xl font-bold text-white tracking-tight">
+                                    {project.title}
+                                </h3>
+                            </div>
+                            
+                            <div className="flex gap-3">
+                                {project.live && (
+                                    <a 
+                                        href={project.link} 
+                                        className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        <ArrowUpRight className="w-5 h-5" />
+                                    </a>
+                                )}
+                                <a 
+                                    href={project.github} 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-white/30 transition-colors"
+                                >
+                                    <Github className="w-5 h-5" />
+                                </a>
+                            </div>
+                        </div>
 
-                    <div className="font-mono-tech text-white/50 text-xs mb-2 uppercase">
-                        [{project.subtitle}]
+                        <p className="text-white/80 text-sm leading-relaxed mb-6 font-light max-w-sm">
+                            {project.description}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2">
+                            {project.tech.map((t: string, i: number) => (
+                                <span key={`${t}-${i}`} className="px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 text-white text-[11px] font-medium tracking-wide rounded-full">
+                                    {t}
+                                </span>
+                            ))}
+                        </div>
                     </div>
-                    <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-4 group-hover:text-[#ccff00] transition-colors">
-                        {project.title}
-                    </h3>
-                    <p className="text-white/70 text-sm font-mono-tech">
-                        {project.description}
-                    </p>
                 </div>
             </div>
         </motion.div>
@@ -106,31 +117,24 @@ const Projects = () => {
         offset: ["start end", "end start"]
     });
     
-    const x = useTransform(scrollYProgress, [0, 1], [0, -200]);
+    const x = useTransform(scrollYProgress, [0, 1], [0, -300]);
 
     return (
-        <section id="projects" ref={containerRef} className="py-32 relative bg-black border-y-2 border-white/20 overflow-hidden">
+        <section id="projects" ref={containerRef} className="py-40 relative overflow-hidden z-10">
             
-            {/* Background Marquee */}
-            <motion.div style={{ x }} className="absolute top-10 left-0 w-[200vw] text-[12vw] font-black text-white/[0.03] uppercase whitespace-nowrap pointer-events-none leading-none select-none">
-                DEPLOY &gt; ITERATE &gt; SCALE &gt;
-            </motion.div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10">
-                <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b-2 border-white/20 pb-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 relative z-10">
+                <div className="flex flex-col md:flex-row justify-between items-end gap-6 pb-8 border-b border-white/10">
                     <div>
-                        <span className="font-mono-tech text-[#ccff00] text-sm mb-2 block">/* SYSTEM_OUTPUT */</span>
-                        <h2 className="text-5xl md:text-7xl font-black uppercase">Projects</h2>
+                        <h2 className="text-5xl md:text-7xl font-bold tracking-tight">Selected <span className="text-white/40">Works</span></h2>
                     </div>
-                    <div className="font-mono-tech text-white/50 text-right text-xs">
-                        TOTAL: {projects.length} <br />
-                        STATUS: OPERATIONAL
+                    <div className="text-white/50 text-right text-sm font-light uppercase tracking-widest">
+                        Case Studies
                     </div>
                 </div>
             </div>
 
             <div className="relative w-full z-10">
-                <div className="flex gap-10 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 lg:px-8 pb-12 pt-4 hide-scrollbar">
+                <div className="flex gap-8 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 lg:px-8 pb-16 pt-4 hide-scrollbar">
                     {projects.map((project, index) => (
                         <ProjectCard key={project.title} project={project} index={index} />
                     ))}

@@ -4,21 +4,17 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 const CustomCursor = () => {
     const [isVisible, setIsVisible] = useState(false);
     
-    // Exact position for the crosshair center
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Spring position for the trailing coordinates box
-    const springX = useSpring(mouseX, { stiffness: 500, damping: 28 });
-    const springY = useSpring(mouseY, { stiffness: 500, damping: 28 });
-
-    const [coords, setCoords] = useState({ x: 0, y: 0 });
+    // Smooth spring physics for luxurious feel
+    const springX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.5 });
+    const springY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.5 });
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
-            setCoords({ x: e.clientX, y: e.clientY });
             
             if (!isVisible) setIsVisible(true);
         };
@@ -43,9 +39,9 @@ const CustomCursor = () => {
 
     return (
         <>
-            {/* The exact crosshair point */}
+            {/* Tiny precise dot */}
             <motion.div
-                className="fixed top-0 left-0 w-4 h-4 pointer-events-none z-[9999] mix-blend-difference"
+                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[10002] mix-blend-difference"
                 style={{
                     x: mouseX,
                     y: mouseY,
@@ -53,26 +49,19 @@ const CustomCursor = () => {
                     translateY: '-50%',
                     opacity: isVisible ? 1 : 0
                 }}
-            >
-                <div className="relative w-full h-full flex items-center justify-center">
-                    <div className="absolute w-full h-[2px] bg-white" />
-                    <div className="absolute h-full w-[2px] bg-white" />
-                </div>
-            </motion.div>
+            />
 
-            {/* The trailing data box */}
+            {/* Smooth magnetic trailing aura */}
             <motion.div
-                className="fixed top-0 left-0 pointer-events-none z-[9998]"
+                className="fixed top-0 left-0 w-12 h-12 border border-white/20 bg-white/5 backdrop-blur-sm rounded-full pointer-events-none z-[10001]"
                 style={{
                     x: springX,
                     y: springY,
+                    translateX: '-50%',
+                    translateY: '-50%',
                     opacity: isVisible ? 1 : 0
                 }}
-            >
-                <div className="ml-4 mt-4 px-2 py-1 bg-white text-black font-mono-tech text-[10px] font-bold tracking-widest whitespace-nowrap uppercase brutalist-border" style={{ boxShadow: '2px 2px 0px 0px var(--color-primary)' }}>
-                    X:{coords.x} Y:{coords.y}
-                </div>
-            </motion.div>
+            />
         </>
     );
 };

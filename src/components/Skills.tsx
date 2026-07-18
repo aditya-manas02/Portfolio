@@ -19,55 +19,63 @@ const skillCategories = [
     }
 ];
 
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.1 }
+    }
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+};
+
 const Skills = () => {
     return (
-        <section id="skills" className="py-24 relative overflow-hidden bg-background">
-            
-            {/* Massive Marquee */}
-            <div className="w-full bg-[#ccff00] text-black border-y-4 border-white py-4 overflow-hidden transform -rotate-2 scale-110 relative z-10">
-                <div className="flex animate-marquee gap-8 whitespace-nowrap">
-                    {[...Array(6)].map((_, i) => (
-                        <span key={i} className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-                            TECHNICAL_ARSENAL // NO_COMPROMISE // 
-                        </span>
-                    ))}
+        <section id="skills" className="py-32 relative overflow-hidden z-10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div className="text-center mb-20">
+                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+                        Technical <span className="text-white/40">Expertise</span>
+                    </h2>
+                    <p className="text-lg text-secondary font-light max-w-2xl mx-auto">
+                        A curated selection of the tools, languages, and frameworks I use to build robust digital solutions.
+                    </p>
                 </div>
-            </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32">
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12"
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
                 >
-                    {skillCategories.map((group, idx) => (
-                        <div key={group.category} className="flex flex-col">
-                            <div className="flex items-end justify-between border-b-2 border-white/20 pb-2 mb-6">
-                                <h3 className="text-2xl font-black uppercase tracking-widest text-white">
-                                    {group.category}
-                                </h3>
-                                <span className="font-mono-tech text-xs text-[#ccff00]">
-                                    [SYS_{idx + 1}]
-                                </span>
-                            </div>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                {group.items.map((item, itemIdx) => (
-                                    <div
+                    {skillCategories.map((group) => (
+                        <motion.div 
+                            key={group.category} 
+                            variants={itemVariants}
+                            className="glass-card p-8 md:p-10 group hover:bg-white/[0.03] transition-colors"
+                        >
+                            <h3 className="text-2xl font-semibold tracking-tight text-white mb-8 border-b border-white/10 pb-4 group-hover:text-white transition-colors">
+                                {group.category}
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
+                                {group.items.map((item) => (
+                                    <span
                                         key={item}
-                                        className="font-mono-tech text-sm text-white/70 hover:text-[#ccff00] hover:translate-x-1 transition-all duration-300 cursor-default flex items-center gap-2"
+                                        className="px-4 py-2 glass-pill text-sm text-secondary hover:text-white hover:bg-white/10 transition-all cursor-default"
                                     >
-                                        <span className="text-white/20 text-[10px]">{(itemIdx + 1).toString().padStart(2, '0')}</span>
                                         {item}
-                                    </div>
+                                    </span>
                                 ))}
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
                 </motion.div>
             </div>
-            
-            {/* Background Grid Pattern is inherited from App.tsx globals */}
         </section>
     );
 };

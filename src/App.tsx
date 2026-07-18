@@ -53,56 +53,58 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-white overflow-x-hidden font-inter antialiased scanlines bg-grid-pattern selection:bg-[#ccff00] selection:text-black">
+    <div className="min-h-screen bg-background text-primary selection:bg-white selection:text-black relative">
       <CustomCursor />
       
-      {/* Brutalist Progress Bar */}
-      <motion.div className="fixed top-0 left-0 right-0 h-2 bg-[#ccff00] origin-left z-[10001] shadow-[0_0_15px_rgba(204,255,0,0.5)]" style={{ scaleX }} />
+      {/* Ambient Background Orbs */}
+      <div className="ambient-orb ambient-orb-1" />
+      <div className="ambient-orb ambient-orb-2" />
+      <div className="ambient-orb ambient-orb-3" />
+
+      {/* Elegant Progress Bar */}
+      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-white/50 backdrop-blur-md origin-left z-[10001]" style={{ scaleX }} />
 
       <Navbar />
 
       <main className="relative z-10">
         <Hero />
 
-        {/* Brutalist About Section */}
-        <section id="about" className="py-40 max-w-7xl mx-auto px-6 lg:px-10 relative">
+        {/* Elegant About Section */}
+        <section id="about" className="py-40 max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="brutalist-border p-10 md:p-24 relative overflow-hidden flex flex-col lg:flex-row items-center gap-16"
+            className="glass-card p-10 md:p-20 relative flex flex-col lg:flex-row items-center gap-16 overflow-hidden"
           >
-            {/* Corner accoutrements */}
-            <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-white/50" />
-            <div className="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-white/50" />
-
             <div className="relative w-64 h-64 md:w-[400px] md:h-[400px] flex-shrink-0">
                <motion.div 
-                 whileHover={{ scale: 0.98 }}
-                 className="relative z-10 w-full h-full border-4 border-white overflow-hidden shadow-[8px_8px_0px_0px_rgba(204,255,0,1)] grayscale hover:grayscale-0 transition-all duration-500"
+                 whileHover={{ scale: 1.02 }}
+                 transition={{ duration: 0.4, ease: "easeOut" }}
+                 className="relative z-10 w-full h-full rounded-full overflow-hidden border border-white/10 shadow-2xl"
                >
                  <img
                    src={formalPic2}
                    alt="Aditya Manas"
                    className="w-full h-full object-cover"
                  />
-                 <div className="absolute inset-0 bg-black/20 mix-blend-overlay" />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent mix-blend-overlay" />
                </motion.div>
             </div>
 
             <div className="text-center lg:text-left flex-1 relative z-10">
-               <h2 className="text-5xl md:text-8xl font-black mb-8 tracking-tighter uppercase leading-none">
-                    Raw <br /> <span className="text-[#ccff00] glitch-hover">Engineering</span>
+               <h2 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
+                    Crafting <br /> <span className="text-gradient-accent">Digital Elegance</span>
                </h2>
               
-              <div className="text-xl md:text-2xl text-white/70 leading-relaxed max-w-3xl font-mono-tech mb-10 tracking-tight">
-                    [SYS.MSG]: Bringing ideas to life through high-performance software and unapologetic designs.
+              <div className="text-lg md:text-xl text-secondary leading-relaxed max-w-2xl font-light mb-10">
+                    Bringing visionary ideas to life through high-performance software, meticulously crafted user interfaces, and an uncompromising attention to detail.
               </div>
 
               <div className="flex justify-center lg:justify-start">
-                  <a href="#projects" className="px-10 py-5 bg-[#ccff00] text-black font-black uppercase tracking-widest text-sm hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all">
-                      EXECUTE_WORKS
+                  <a href="#projects" className="px-8 py-4 bg-white text-black rounded-full font-medium tracking-wide hover:bg-gray-200 transition-colors shadow-lg hover:shadow-xl">
+                      Explore Work
                   </a>
               </div>
             </div>
@@ -117,10 +119,10 @@ function App() {
         <Contact />
       </main>
 
-      <footer className="py-24 border-t-2 border-white/20 text-center relative z-10 bg-black mt-20">
+      <footer className="py-20 border-t border-white/5 text-center relative z-10 bg-transparent mt-20 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6">
-           <p className="text-[12px] font-mono-tech uppercase tracking-[0.2em] text-white/50">
-               // SYS.OFFLINE // © 2026 ADITYA MANAS // ALL_RIGHTS_RESERVED
+           <p className="text-sm font-light tracking-widest text-secondary uppercase">
+               © 2026 Aditya Manas • Engineered with Precision
            </p>
         </div>
       </footer>
