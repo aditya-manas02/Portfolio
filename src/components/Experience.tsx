@@ -18,7 +18,7 @@ const experiences = [
 
 const Experience = () => {
     return (
-        <section id="experience" className="py-24 relative overflow-hidden z-10">
+        <section id="experience" className="py-24 relative overflow-hidden z-10 bg-background">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <motion.div
@@ -27,8 +27,8 @@ const Experience = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-                        Professional <span className="text-white/40">Journey</span>
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-primary mb-4">
+                        Professional Journey
                     </h2>
                 </motion.div>
 
@@ -40,18 +40,18 @@ const Experience = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
-                            className="glass-card p-8 md:p-10 flex flex-col md:flex-row gap-6 items-start group hover:bg-white/[0.04]"
+                            className="luxury-card p-8 md:p-10 flex flex-col md:flex-row gap-6 items-start group"
                         >
-                            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:bg-white/10 transition-colors shrink-0">
-                                <Briefcase className="w-8 h-8 text-white/80" />
+                            <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 group-hover:bg-primary group-hover:border-primary transition-colors shrink-0 shadow-sm">
+                                <Briefcase className="w-8 h-8 text-primary group-hover:text-white transition-colors" />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-2xl font-semibold tracking-tight text-white mb-2">{exp.title}</h3>
-                                <div className="text-lg text-white/70 font-medium mb-4">{exp.company}</div>
-                                <p className="text-secondary leading-relaxed font-light mb-4">
+                                <h3 className="text-xl font-bold tracking-tight text-primary mb-1">{exp.title}</h3>
+                                <div className="text-base text-accent font-semibold mb-4">{exp.company}</div>
+                                <p className="text-secondary leading-relaxed font-normal mb-6">
                                     {exp.description}
                                 </p>
-                                <div className="inline-flex items-center gap-2 px-3 py-1.5 glass-pill text-xs text-white/60 font-medium">
+                                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-zinc-50 border border-zinc-200 rounded-full text-xs text-secondary font-medium shadow-sm">
                                     <Calendar className="w-3.5 h-3.5" />
                                     {exp.period}
                                 </div>

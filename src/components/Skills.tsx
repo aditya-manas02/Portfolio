@@ -34,14 +34,14 @@ const itemVariants = {
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-32 relative overflow-hidden z-10">
+        <section id="skills" className="py-24 relative overflow-hidden z-10 bg-white border-y border-zinc-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-                        Technical <span className="text-white/40">Expertise</span>
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-primary mb-4">
+                        Technical Expertise
                     </h2>
-                    <p className="text-lg text-secondary font-light max-w-2xl mx-auto">
+                    <p className="text-lg text-secondary font-normal max-w-2xl mx-auto">
                         A curated selection of the tools, languages, and frameworks I use to build robust digital solutions.
                     </p>
                 </div>
@@ -51,22 +51,22 @@ const Skills = () => {
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, margin: "-100px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
                 >
                     {skillCategories.map((group) => (
                         <motion.div 
                             key={group.category} 
                             variants={itemVariants}
-                            className="glass-card p-8 md:p-10 group hover:bg-white/[0.03] transition-colors"
+                            className="luxury-card p-8 group"
                         >
-                            <h3 className="text-2xl font-semibold tracking-tight text-white mb-8 border-b border-white/10 pb-4 group-hover:text-white transition-colors">
+                            <h3 className="text-xl font-semibold tracking-tight text-primary mb-6 border-b border-zinc-100 pb-3">
                                 {group.category}
                             </h3>
-                            <div className="flex flex-wrap gap-3">
+                            <div className="flex flex-wrap gap-2.5">
                                 {group.items.map((item) => (
                                     <span
                                         key={item}
-                                        className="px-4 py-2 glass-pill text-sm text-secondary hover:text-white hover:bg-white/10 transition-all cursor-default"
+                                        className="px-3.5 py-1.5 bg-zinc-50 border border-zinc-200 text-sm font-medium text-secondary rounded-lg hover:bg-primary hover:text-white hover:border-primary transition-all cursor-default shadow-sm"
                                     >
                                         {item}
                                     </span>

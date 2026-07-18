@@ -1,125 +1,97 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '../lib/utils';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            setScrolled(window.scrollY > 50);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: 'About', href: '#about' },
-        { name: 'Skills', href: '#skills' },
+    const links = [
         { name: 'Projects', href: '#projects' },
-        { name: 'Education', href: '#education' },
+        { name: 'Skills', href: '#skills' },
         { name: 'Experience', href: '#experience' },
-        { name: 'Certificates', href: '#certificates' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'Education', href: '#education' },
     ];
 
     return (
-        <nav
-            className={cn(
-                'fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] max-w-5xl rounded-full',
-                scrolled ? 'glass-pill py-3 px-6' : 'bg-transparent py-4 px-6 border-transparent'
-            )}
+        <motion.nav 
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] md:w-auto ${scrolled ? 'scale-95' : 'scale-100'}`}
         >
-            <div className="flex items-center justify-between">
-                <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="flex-shrink-0"
+            <div className="luxury-pill bg-white/80 backdrop-blur-md px-6 py-3 flex items-center justify-between gap-8 md:gap-16">
+                <a href="#hero" className="font-bold text-xl tracking-tighter text-primary">
+                    AM.
+                </a>
+
+                <div className="hidden md:flex items-center gap-8">
+                    {links.map((link) => (
+                        <a 
+                            key={link.name} 
+                            href={link.href}
+                            className="text-sm font-medium text-secondary hover:text-primary transition-colors"
+                        >
+                            {link.name}
+                        </a>
+                    ))}
+                </div>
+
+                <a 
+                    href="#contact"
+                    className="hidden md:block text-sm font-medium text-accent hover:text-blue-700 transition-colors"
                 >
-                    <a href="#" className="text-xl font-bold tracking-tight text-white hover:text-white/70 transition-colors">
-                        Aditya.
-                    </a>
-                </motion.div>
+                    Let's Talk
+                </a>
 
-                <div className="hidden md:block">
-                    <div className="flex items-center space-x-2">
-                        {navLinks.map((link, index) => (
-                            <motion.a
-                                key={link.name}
-                                href={link.href}
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.05 }}
-                                className="px-4 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
-                            >
-                                {link.name}
-                            </motion.a>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="hidden md:block">
-                     <motion.a
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        href="/AdityaManasCV1.pdf"
-                        download
-                        className="flex items-center gap-2 px-6 py-2.5 bg-white text-black font-semibold text-sm rounded-full hover:bg-gray-200 transition-all shadow-lg"
-                    >
-                        <Download className="w-4 h-4" />
-                        Resume
-                    </motion.a>
-                </div>
-
-                <div className="md:hidden flex items-center gap-4">
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="text-white/80 hover:text-white p-2 focus:outline-none"
-                    >
-                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-                    </button>
-                </div>
+                {/* Mobile Menu Button */}
+                <button 
+                    className="md:hidden text-primary focus:outline-none"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                    </svg>
+                </button>
             </div>
 
+            {/* Mobile Dropdown */}
             <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, height: 'auto', scale: 1 }}
-                        exit={{ opacity: 0, height: 0, scale: 0.95 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="md:hidden mt-4 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-3xl overflow-hidden shadow-2xl absolute top-full left-0 right-0"
+                {menuOpen && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 10 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className="absolute top-full left-0 right-0 luxury-card p-4 mt-2 flex flex-col gap-4 md:hidden"
                     >
-                        <div className="px-4 py-6 space-y-2">
-                            {navLinks.map((link) => (
-                                <a
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className="block px-4 py-3 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-xl transition-all"
-                                >
-                                    {link.name}
-                                </a>
-                            ))}
-                            <div className="pt-4 mt-4 border-t border-white/10">
-                                <a
-                                    href="/AdityaManasCV1.pdf"
-                                    download
-                                    className="flex items-center justify-center gap-2 w-full px-6 py-3 bg-white text-black font-semibold text-sm rounded-full hover:bg-gray-200 transition-all"
-                                >
-                                    <Download className="w-4 h-4" />
-                                    Download Resume
-                                </a>
-                            </div>
-                        </div>
+                        {links.map((link) => (
+                            <a 
+                                key={link.name} 
+                                href={link.href}
+                                onClick={() => setMenuOpen(false)}
+                                className="text-base font-medium text-secondary hover:text-primary transition-colors"
+                            >
+                                {link.name}
+                            </a>
+                        ))}
+                        <a 
+                            href="#contact"
+                            onClick={() => setMenuOpen(false)}
+                            className="text-base font-medium text-accent hover:text-blue-700 transition-colors pt-2 border-t border-zinc-100"
+                        >
+                            Let's Talk
+                        </a>
                     </motion.div>
                 )}
             </AnimatePresence>
-        </nav>
+        </motion.nav>
     );
 };
 

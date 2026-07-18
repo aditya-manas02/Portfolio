@@ -1,66 +1,70 @@
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-    const [isVisible, setIsVisible] = useState(false);
-    
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isHovering, setIsHovering] = useState(false);
 
-    // Smooth spring physics for luxurious feel
-    const springX = useSpring(mouseX, { stiffness: 150, damping: 15, mass: 0.5 });
-    const springY = useSpring(mouseY, { stiffness: 150, damping: 15, mass: 0.5 });
+    // Smooth springs for physics-based movement
+    const springX = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
+    const springY = useSpring(0, { stiffness: 500, damping: 28, mass: 0.5 });
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            mouseX.set(e.clientX);
-            mouseY.set(e.clientY);
-            
-            if (!isVisible) setIsVisible(true);
+        const updateMousePosition = (e: MouseEvent) => {
+            setMousePosition({ x: e.clientX, y: e.clientY });
+            springX.set(e.clientX - 10); // Offset by half width/height
+            springY.set(e.clientY - 10);
         };
 
-        const handleMouseLeave = () => setIsVisible(false);
-        const handleMouseEnter = () => setIsVisible(true);
+        const handleMouseOver = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            // Check if hovering over clickable elements
+            if (
+                target.tagName.toLowerCase() === 'a' ||
+                target.tagName.toLowerCase() === 'button' ||
+                target.closest('a') ||
+                target.closest('button')
+            ) {
+                setIsHovering(true);
+            } else {
+                setIsHovering(false);
+            }
+        };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseleave', handleMouseLeave);
-        window.addEventListener('mouseenter', handleMouseEnter);
+        window.addEventListener('mousemove', updateMousePosition);
+        window.addEventListener('mouseover', handleMouseOver);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseleave', handleMouseLeave);
-            window.removeEventListener('mouseenter', handleMouseEnter);
+            window.removeEventListener('mousemove', updateMousePosition);
+            window.removeEventListener('mouseover', handleMouseOver);
         };
-    }, [mouseX, mouseY, isVisible]);
-
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
-        return null; // Don't show custom cursor on mobile
-    }
+    }, [springX, springY]);
 
     return (
         <>
-            {/* Tiny precise dot */}
+            {/* The crisp magnetic dot */}
             <motion.div
-                className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[10002] mix-blend-difference"
-                style={{
-                    x: mouseX,
-                    y: mouseY,
-                    translateX: '-50%',
-                    translateY: '-50%',
-                    opacity: isVisible ? 1 : 0
-                }}
-            />
-
-            {/* Smooth magnetic trailing aura */}
-            <motion.div
-                className="fixed top-0 left-0 w-12 h-12 border border-white/20 bg-white/5 backdrop-blur-sm rounded-full pointer-events-none z-[10001]"
+                className="fixed top-0 left-0 w-5 h-5 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-difference"
                 style={{
                     x: springX,
                     y: springY,
-                    translateX: '-50%',
-                    translateY: '-50%',
-                    opacity: isVisible ? 1 : 0
                 }}
+                animate={{
+                    scale: isHovering ? 2.5 : 1,
+                    opacity: isHovering ? 1 : 1,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            />
+            {/* Subtle trailing shadow for elegance */}
+            <motion.div
+                className="fixed top-0 left-0 w-10 h-10 border border-primary/20 rounded-full pointer-events-none z-[9998] hidden md:block"
+                animate={{
+                    x: mousePosition.x - 20,
+                    y: mousePosition.y - 20,
+                    scale: isHovering ? 1.5 : 1,
+                    opacity: isHovering ? 0 : 1,
+                }}
+                transition={{ type: "tween", ease: "backOut", duration: 0.15 }}
             />
         </>
     );
