@@ -47,11 +47,11 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
             <div className="relative h-[450px] sm:h-[550px] w-full bg-black border-2 border-white/20 brutalist-border overflow-hidden flex flex-col justify-between">
                 
                 {/* Tech Bar */}
-                <div className="border-b-2 border-white/20 p-3 bg-black flex gap-2 overflow-hidden z-10">
-                    <div className="flex animate-marquee gap-2">
-                        {[...project.tech, ...project.tech, ...project.tech].map((t: string, i: number) => (
-                            <span key={`${t}-${i}`} className="px-2 py-1 bg-[#ccff00] text-black font-mono-tech text-[10px] font-bold uppercase tracking-widest whitespace-nowrap">
-                                {t}
+                <div className="border-b-2 border-white/20 bg-[#ccff00] overflow-hidden z-10 w-full py-1">
+                    <div className="flex animate-marquee gap-0">
+                        {[...project.tech, ...project.tech, ...project.tech, ...project.tech].map((t: string, i: number) => (
+                            <span key={`${t}-${i}`} className="px-4 py-1 text-black font-mono-tech text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+                                {t} •
                             </span>
                         ))}
                     </div>
