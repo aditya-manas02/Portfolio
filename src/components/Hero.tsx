@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Github, Linkedin, ArrowRight, MapPin, Download, Sparkles, Code2 } from 'lucide-react';
+import { Github, Linkedin, ArrowRight, MapPin, Download, Sparkles } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import profilePic from '../assets/formal-pic-2.jpg';
 
