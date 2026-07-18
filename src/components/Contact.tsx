@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
+import { Mail, Phone, Send, Github, Linkedin } from 'lucide-react';
 
 const Contact = () => {
     return (
