@@ -156,14 +156,16 @@ const Hero = () => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="md:col-span-4 perspective-[1000px]"
                     >
-                        <TiltCard className="w-full h-full p-8 flex items-center justify-center group bg-primary !border-none !text-white cursor-pointer hover:bg-zinc-800 transition-colors">
-                            <div className="flex flex-col items-center gap-3">
-                                <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center group-hover:-translate-y-2 transition-transform duration-300">
-                                    <Download className="w-6 h-6 text-white" />
+                        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                            <TiltCard className="w-full h-full p-8 flex items-center justify-center group bg-primary !border-none !text-white cursor-pointer hover:bg-zinc-800 transition-colors">
+                                <div className="flex flex-col items-center gap-3">
+                                    <div className="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center group-hover:-translate-y-2 transition-transform duration-300">
+                                        <Download className="w-6 h-6 text-white" />
+                                    </div>
+                                    <span className="font-bold text-lg tracking-tight">Download Resume</span>
                                 </div>
-                                <span className="font-bold text-lg tracking-tight">Download Resume</span>
-                            </div>
-                        </TiltCard>
+                            </TiltCard>
+                        </a>
                     </motion.div>
 
                 </div>
