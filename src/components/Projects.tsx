@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, ArrowUpRight } from 'lucide-react';
 
 import safetywatchImg from '../assets/safetywatch.png';
@@ -50,141 +50,116 @@ const allProjects = [
     }
 ];
 
-const ProjectCard3D = ({ project, index }: { project: any; index: number }) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
-    const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
-
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
-    const imageScale = useTransform(mouseXSpring, [-0.5, 0.5], [1.05, 1.1]);
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (!ref.current) return;
-        const rect = ref.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
+const ProjectCard = ({ project, index, range, targetScale, progress }: any) => {
+    const container = useRef(null);
+    const scale = useTransform(progress, range, [1, targetScale]);
+    
+    // Parallax effect for the image inside the card
+    const imageScale = useTransform(progress, range, [1, 1.2]);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="group perspective-1000 w-full"
-        >
-            <motion.div
-                ref={ref}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
-                style={{
-                    rotateX,
-                    rotateY,
-                    transformStyle: "preserve-3d",
-                }}
-                className="luxury-card relative h-[600px] w-full overflow-hidden flex flex-col justify-between transition-transform duration-200 ease-linear"
+        <div ref={container} className="h-screen flex items-center justify-center sticky top-0 px-4">
+            <motion.div 
+                style={{ scale, top: `calc(-5vh + ${index * 25}px)` }} 
+                className="relative w-full max-w-5xl h-[600px] luxury-card overflow-hidden flex flex-col md:flex-row shadow-[0_20px_50px_rgba(0,0,0,0.1)] origin-top"
             >
-                {/* 3D Parallax Image Area */}
-                <div className="relative h-[45%] w-full overflow-hidden border-b border-zinc-100 bg-zinc-900 shrink-0" style={{ transform: 'translateZ(40px)' }}>
-                    <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        style={{ scale: imageScale }}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                {/* Image Section */}
+                <div className="relative w-full md:w-1/2 h-1/2 md:h-full overflow-hidden bg-zinc-100">
+                    <motion.div style={{ scale: imageScale }} className="w-full h-full">
+                        <img 
+                            src={project.image} 
+                            alt={project.title} 
+                            className="w-full h-full object-cover"
+                        />
+                    </motion.div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10 pointer-events-none" />
                 </div>
 
-                {/* Content Area */}
-                <div className="p-8 h-[55%] flex flex-col justify-between bg-white z-10 relative" style={{ transform: 'translateZ(60px)' }}>
+                {/* Content Section */}
+                <div className="w-full md:w-1/2 h-1/2 md:h-full p-8 md:p-12 flex flex-col justify-between bg-white z-10">
                     <div>
-                        <div className="text-accent text-xs font-semibold mb-2 tracking-wide uppercase">
+                        <div className="text-accent text-sm font-extrabold tracking-widest uppercase mb-3">
                             {project.subtitle}
                         </div>
-                        <h3 className="text-3xl font-bold text-primary tracking-tight mb-3">
+                        <h3 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tight mb-4">
                             {project.title}
                         </h3>
-                        <p className="text-secondary text-sm leading-relaxed mb-6 font-normal">
+                        <p className="text-secondary text-base md:text-lg leading-relaxed mb-8">
                             {project.description}
                         </p>
-                    </div>
-                    
-                    <div>
-                        <div className="flex flex-wrap gap-2 mb-6">
+                        
+                        <div className="flex flex-wrap gap-2 mb-8">
                             {project.tech.map((t: string, i: number) => (
-                                <span key={`${t}-${i}`} className="px-3 py-1 bg-zinc-50 text-zinc-600 text-[11px] font-medium rounded-full border border-zinc-200 shadow-sm">
+                                <span key={i} className="px-4 py-1.5 bg-zinc-50 text-zinc-700 text-xs font-bold rounded-full border border-zinc-200 shadow-sm">
                                     {t}
                                 </span>
                             ))}
                         </div>
+                    </div>
 
-                        <div className="flex gap-3 pt-4 border-t border-zinc-100">
-                            {project.live && (
-                                <a 
-                                    href={project.link} 
-                                    className="flex items-center gap-2 text-sm font-medium text-white bg-primary px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors shadow-md transform hover:scale-105"
-                                    target="_blank"
-                                    rel="noreferrer"
-                                >
-                                    Live Demo
-                                    <ArrowUpRight className="w-4 h-4" />
-                                </a>
-                            )}
+                    <div className="flex gap-4 pt-6 border-t border-zinc-100">
+                        {project.live && (
                             <a 
-                                href={project.github} 
-                                target="_blank" 
+                                href={project.link} 
+                                className="flex items-center gap-2 text-sm font-bold text-white bg-primary px-6 py-3 rounded-full hover:bg-zinc-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                                target="_blank"
                                 rel="noreferrer"
-                                className="flex items-center gap-2 text-sm font-medium text-secondary bg-white border border-zinc-200 px-4 py-2 rounded-full hover:bg-zinc-50 transition-colors shadow-sm transform hover:scale-105"
                             >
-                                Source
-                                <Github className="w-4 h-4" />
+                                Live Demo
+                                <ArrowUpRight className="w-4 h-4" />
                             </a>
-                        </div>
+                        )}
+                        <a 
+                            href={project.github} 
+                            target="_blank" 
+                            rel="noreferrer"
+                            className="flex items-center gap-2 text-sm font-bold text-secondary bg-white border-2 border-zinc-200 px-6 py-3 rounded-full hover:bg-zinc-50 transition-all shadow-sm hover:shadow hover:-translate-y-0.5"
+                        >
+                            Source
+                            <Github className="w-4 h-4" />
+                        </a>
                     </div>
                 </div>
             </motion.div>
-        </motion.div>
+        </div>
     );
 };
 
 const Projects = () => {
-    return (
-        <section id="projects" className="py-32 relative overflow-hidden z-10 bg-background">
-            
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10 text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-primary mb-4">Featured Work</h2>
-                    <p className="text-lg text-secondary font-normal max-w-2xl mx-auto">
-                        A collection of cutting-edge web applications, spanning high-end e-commerce, AI curation, and real-time incident reporting platforms.
-                    </p>
-                </motion.div>
-            </div>
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start start', 'end end']
+    });
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                    {allProjects.map((project, index) => (
-                        <ProjectCard3D key={project.title} project={project} index={index} />
-                    ))}
+    return (
+        <section id="projects" ref={container} className="relative z-10 bg-background pb-[10vh] mt-24">
+            
+            <div className="sticky top-0 h-[20vh] flex items-center justify-center pointer-events-none z-0">
+                <div className="text-center pt-20">
+                    <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-primary mb-4">
+                        Selected Works
+                    </h2>
+                    <p className="text-lg text-secondary font-medium max-w-xl mx-auto">
+                        Scroll down to explore my latest creations.
+                    </p>
                 </div>
+            </div>
+            
+            <div className="mt-[-20vh]">
+                {allProjects.map((project, i) => {
+                    const targetScale = 1 - ( (allProjects.length - i) * 0.05);
+                    return (
+                        <ProjectCard 
+                            key={i} 
+                            index={i} 
+                            project={project} 
+                            progress={scrollYProgress} 
+                            range={[i * 0.25, 1]} 
+                            targetScale={targetScale} 
+                        />
+                    );
+                })}
             </div>
         </section>
     );
