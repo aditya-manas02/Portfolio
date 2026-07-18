@@ -33,20 +33,20 @@ const allProjects = [
         subtitle: 'AI Music Curator',
         description: 'An AI-powered web app that generates personalized music playlists based on your current emotion or activity. The bot curates tracks that vibe with your mood automatically using advanced public music APIs.',
         tech: ['React', 'Tailwind', 'AI APIs', 'Audio'],
-        link: '#',
+        link: 'https://emotion-beat-curator-bot.vercel.app/',
         github: 'https://github.com/aditya-manas02/emotion-beat-curator-bot',
         image: emotionBeatImg,
-        live: false,
+        live: true,
     },
     {
         title: 'Sevantra',
         subtitle: 'Civic Engagement Platform',
         description: 'A comprehensive monorepo platform designed to bridge the gap between citizens and NGOs. Features secure Google OAuth, real-time dynamic statistics, and an admin command center for verifying organizations.',
         tech: ['Next.js', 'Express', 'Prisma', 'PostgreSQL'],
-        link: 'https://sevantra-web.vercel.app',
+        link: 'https://sevantra.vercel.app/',
         github: 'https://github.com/aditya-manas02/sevantra',
         image: sevantraImg,
-        live: false,
+        live: true,
     }
 ];
 
