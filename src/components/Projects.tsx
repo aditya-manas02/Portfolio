@@ -112,12 +112,6 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
 
 const Projects = () => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
-    
-    const x = useTransform(scrollYProgress, [0, 1], [0, -300]);
 
     return (
         <section id="projects" ref={containerRef} className="py-40 relative overflow-hidden z-10">

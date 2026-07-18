@@ -1,11 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Github, Linkedin, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
-    const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 150]);
-    const opacityTransform = useTransform(scrollY, [0, 300], [1, 0]);
-
     return (
         <section 
             id="hero" 
