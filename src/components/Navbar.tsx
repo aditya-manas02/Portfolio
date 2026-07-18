@@ -27,7 +27,7 @@ const Navbar = () => {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] md:w-auto ${scrolled ? 'scale-95' : 'scale-100'}`}
         >
-            <div className="luxury-pill bg-white/80 backdrop-blur-md px-6 py-3 flex items-center justify-between gap-8 md:gap-16">
+            <div className={`luxury-pill px-6 py-3 flex items-center justify-between gap-8 md:gap-16 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-xl shadow-md' : 'bg-white/70 backdrop-blur-md'}`}>
                 <a href="#hero" className="font-bold text-xl tracking-tighter text-primary">
                     AM.
                 </a>

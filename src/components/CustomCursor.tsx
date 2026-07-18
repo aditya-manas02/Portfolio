@@ -44,7 +44,7 @@ const CustomCursor = () => {
         <>
             {/* The crisp magnetic dot */}
             <motion.div
-                className="fixed top-0 left-0 w-5 h-5 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-difference"
+                className="fixed top-0 left-0 w-5 h-5 bg-white rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-difference"
                 style={{
                     x: springX,
                     y: springY,

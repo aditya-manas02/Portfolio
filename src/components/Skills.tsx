@@ -39,10 +39,10 @@ const Skills = () => {
         <section id="skills" className="py-24 relative overflow-hidden z-10 bg-white border-y border-zinc-100">
             
             {/* Infinite Tech Stack Marquee (Top) */}
-            <div className="absolute top-12 left-0 w-full overflow-hidden flex whitespace-nowrap opacity-50 pointer-events-none select-none mask-edges">
+            <div className="absolute top-12 left-0 w-full overflow-hidden flex whitespace-nowrap pointer-events-none select-none mask-edges">
                 <div className="flex animate-marquee min-w-full">
                     {[...allSkills, ...allSkills, ...allSkills].map((item, idx) => (
-                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-100 tracking-tighter uppercase">
+                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-900/5 tracking-tighter uppercase">
                             {item}
                         </span>
                     ))}
@@ -50,10 +50,10 @@ const Skills = () => {
             </div>
             
             {/* Infinite Tech Stack Marquee (Bottom, Reverse) */}
-            <div className="absolute bottom-12 left-0 w-full overflow-hidden flex whitespace-nowrap opacity-50 pointer-events-none select-none mask-edges">
+            <div className="absolute bottom-12 left-0 w-full overflow-hidden flex whitespace-nowrap pointer-events-none select-none mask-edges">
                 <div className="flex animate-marquee-reverse min-w-full">
                     {[...allSkills, ...allSkills, ...allSkills].reverse().map((item, idx) => (
-                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-100 tracking-tighter uppercase">
+                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-900/5 tracking-tighter uppercase">
                             {item}
                         </span>
                     ))}
