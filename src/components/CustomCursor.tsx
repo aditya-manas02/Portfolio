@@ -23,7 +23,9 @@ const CustomCursor = () => {
                 target.tagName.toLowerCase() === 'a' ||
                 target.tagName.toLowerCase() === 'button' ||
                 target.closest('a') ||
-                target.closest('button')
+                target.closest('button') ||
+                target.closest('.cursor-pointer') ||
+                target.closest('[role="button"]')
             ) {
                 setIsHovering(true);
             } else {
@@ -57,7 +59,7 @@ const CustomCursor = () => {
             />
             {/* Subtle trailing shadow for elegance */}
             <motion.div
-                className="fixed top-0 left-0 w-10 h-10 border border-primary/20 rounded-full pointer-events-none z-[9998] hidden md:block"
+                className="fixed top-0 left-0 w-10 h-10 border border-white/50 mix-blend-difference rounded-full pointer-events-none z-[9998] hidden md:block"
                 animate={{
                     x: mousePosition.x - 20,
                     y: mousePosition.y - 20,
