@@ -1,63 +1,122 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Github, ArrowUpRight } from 'lucide-react';
+
+import safetywatchImg from '../assets/safetywatch.png';
+import solecraftImg from '../assets/solecraft.png';
+import emotionBeatImg from '../assets/emotion-beat.png';
+import sevantraImg from '../assets/sevantra.png';
 
 const allProjects = [
     {
         title: 'SafetyWatch',
-        subtitle: 'Community Safety & Incident Reporting',
-        description: 'A full-stack web application developed using React (Vite) and Node.js/Express to enable users to report and track neighborhood safety incidents in real time. Features secure authentication with JWT, role-based access, and Cloudinary integration for image uploads.',
-        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Cloudinary'],
-        category: 'Full Stack',
+        subtitle: 'Community Safety Platform',
+        description: 'A full-stack web application developed using React and Node.js to enable users to report and track neighborhood safety incidents in real time. Features secure JWT authentication and real-time interactive mapping.',
+        tech: ['React', 'Node.js', 'Express', 'MongoDB'],
         link: 'https://safetywatch.vercel.app',
         github: 'https://github.com/aditya-manas02/safetywatch-frontend',
-        image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=800',
+        image: safetywatchImg,
         live: true,
     },
     {
-        title: 'GreenConnect',
-        subtitle: 'Tree Plantation Platform',
-        description: 'A full-stack web platform built to connect organizations and citizens for tree plantation initiatives. Features event creation modules and search filters by location, tree type, and date to enhance user engagement.',
-        tech: ['PHP', 'MySQL', 'Tailwind CSS', 'JavaScript', 'HTML'],
-        category: 'Full Stack',
-        link: 'https://github.com/aditya-manas02/greenconnect',
-        github: 'https://github.com/aditya-manas02/greenconnect',
-        image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800',
+        title: 'SoleCraft',
+        subtitle: '3D Footwear Configurator',
+        description: 'A premium e-commerce platform that allows users to design, customize, and purchase high-end footwear using a real-time 3D configurator. Built with Three.js and Laravel for advanced material selection.',
+        tech: ['Three.js', 'Laravel 11', 'Vite', 'GSAP'],
+        link: '#',
+        github: 'https://github.com/aditya-manas02/solecraft',
+        image: solecraftImg,
         live: false,
     },
+    {
+        title: 'Emotion Beat',
+        subtitle: 'AI Music Curator',
+        description: 'An AI-powered web app that generates personalized music playlists based on your current emotion or activity. The bot curates tracks that vibe with your mood automatically using advanced public music APIs.',
+        tech: ['React', 'Tailwind', 'AI APIs', 'Audio'],
+        link: '#',
+        github: 'https://github.com/aditya-manas02/emotion-beat-curator-bot',
+        image: emotionBeatImg,
+        live: false,
+    },
+    {
+        title: 'Sevantra',
+        subtitle: 'SaaS Analytics Dashboard',
+        description: 'A high-end SaaS platform providing advanced analytics and seamless data management for modern businesses. Features real-time charts, predictive insights, and a highly responsive corporate interface.',
+        tech: ['Next.js', 'React', 'Tailwind', 'Chart.js'],
+        link: '#',
+        github: 'https://github.com/aditya-manas02/sevantra',
+        image: sevantraImg,
+        live: false,
+    }
 ];
 
-const categories = ['All', 'Full Stack'];
+const ProjectCard3D = ({ project, index }: { project: any; index: number }) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
 
-const ProjectCard = ({ project }: { project: any }) => {
+    const mouseXSpring = useSpring(x, { stiffness: 150, damping: 15 });
+    const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 });
+
+    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+    const imageScale = useTransform(mouseXSpring, [-0.5, 0.5], [1.05, 1.1]);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!ref.current) return;
+        const rect = ref.current.getBoundingClientRect();
+        const width = rect.width;
+        const height = rect.height;
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const xPct = mouseX / width - 0.5;
+        const yPct = mouseY / height - 0.5;
+        x.set(xPct);
+        y.set(yPct);
+    };
+
+    const handleMouseLeave = () => {
+        x.set(0);
+        y.set(0);
+    };
+
     return (
-        <motion.div 
-            layout
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.4 }}
-            className="group relative w-full"
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="group perspective-1000 w-full"
         >
-            <div className="luxury-card relative h-[500px] sm:h-[650px] w-full overflow-hidden flex flex-col justify-between">
-                
-                {/* Image Area */}
-                <div className="relative h-2/5 w-full overflow-hidden border-b border-zinc-100 bg-zinc-50 shrink-0">
+            <motion.div
+                ref={ref}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{
+                    rotateX,
+                    rotateY,
+                    transformStyle: "preserve-3d",
+                }}
+                className="luxury-card relative h-[600px] w-full overflow-hidden flex flex-col justify-between transition-transform duration-200 ease-linear"
+            >
+                {/* 3D Parallax Image Area */}
+                <div className="relative h-[45%] w-full overflow-hidden border-b border-zinc-100 bg-zinc-900 shrink-0" style={{ transform: 'translateZ(40px)' }}>
                     <motion.img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        style={{ scale: imageScale }}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100"
                     />
-                    <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.05)] pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Content Area */}
-                <div className="p-8 h-3/5 flex flex-col justify-between bg-white z-10 relative">
+                <div className="p-8 h-[55%] flex flex-col justify-between bg-white z-10 relative" style={{ transform: 'translateZ(60px)' }}>
                     <div>
                         <div className="text-accent text-xs font-semibold mb-2 tracking-wide uppercase">
                             {project.subtitle}
                         </div>
-                        <h3 className="text-2xl font-bold text-primary tracking-tight mb-3">
+                        <h3 className="text-3xl font-bold text-primary tracking-tight mb-3">
                             {project.title}
                         </h3>
                         <p className="text-secondary text-sm leading-relaxed mb-6 font-normal">
@@ -68,7 +127,7 @@ const ProjectCard = ({ project }: { project: any }) => {
                     <div>
                         <div className="flex flex-wrap gap-2 mb-6">
                             {project.tech.map((t: string, i: number) => (
-                                <span key={`${t}-${i}`} className="px-3 py-1 bg-zinc-50 text-zinc-600 text-[11px] font-medium rounded-full border border-zinc-200">
+                                <span key={`${t}-${i}`} className="px-3 py-1 bg-zinc-50 text-zinc-600 text-[11px] font-medium rounded-full border border-zinc-200 shadow-sm">
                                     {t}
                                 </span>
                             ))}
@@ -78,7 +137,7 @@ const ProjectCard = ({ project }: { project: any }) => {
                             {project.live && (
                                 <a 
                                     href={project.link} 
-                                    className="flex items-center gap-2 text-sm font-medium text-white bg-primary px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors shadow-md"
+                                    className="flex items-center gap-2 text-sm font-medium text-white bg-primary px-4 py-2 rounded-full hover:bg-zinc-800 transition-colors shadow-md transform hover:scale-105"
                                     target="_blank"
                                     rel="noreferrer"
                                 >
@@ -90,7 +149,7 @@ const ProjectCard = ({ project }: { project: any }) => {
                                 href={project.github} 
                                 target="_blank" 
                                 rel="noreferrer"
-                                className="flex items-center gap-2 text-sm font-medium text-secondary bg-white border border-zinc-200 px-4 py-2 rounded-full hover:bg-zinc-50 transition-colors shadow-sm"
+                                className="flex items-center gap-2 text-sm font-medium text-secondary bg-white border border-zinc-200 px-4 py-2 rounded-full hover:bg-zinc-50 transition-colors shadow-sm transform hover:scale-105"
                             >
                                 Source
                                 <Github className="w-4 h-4" />
@@ -98,60 +157,34 @@ const ProjectCard = ({ project }: { project: any }) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </motion.div>
     );
 };
 
 const Projects = () => {
-    const [activeTab, setActiveTab] = useState('All');
-
-    const filteredProjects = allProjects.filter(
-        (project) => activeTab === 'All' || project.category === activeTab
-    );
-
     return (
-        <section id="projects" className="py-32 relative overflow-hidden z-10">
+        <section id="projects" className="py-32 relative overflow-hidden z-10 bg-background">
             
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 relative z-10">
-                <div className="flex flex-col md:flex-row justify-between items-end gap-6 pb-6 border-b border-zinc-200">
-                    <div>
-                        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-primary">Selected Works</h2>
-                    </div>
-                    
-                    {/* Interactive Filter Tabs */}
-                    <div className="flex bg-zinc-100 p-1.5 rounded-full">
-                        {categories.map((category) => (
-                            <button
-                                key={category}
-                                onClick={() => setActiveTab(category)}
-                                className={`relative px-5 py-2 text-sm font-medium rounded-full transition-colors ${
-                                    activeTab === category ? 'text-primary' : 'text-secondary hover:text-primary'
-                                }`}
-                            >
-                                {activeTab === category && (
-                                    <motion.div
-                                        layoutId="activeTabIndicator"
-                                        className="absolute inset-0 bg-white rounded-full shadow-sm"
-                                        initial={false}
-                                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                    />
-                                )}
-                                <span className="relative z-10">{category}</span>
-                            </button>
-                        ))}
-                    </div>
-                </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 relative z-10 text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                >
+                    <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-primary mb-4">Featured Work</h2>
+                    <p className="text-lg text-secondary font-normal max-w-2xl mx-auto">
+                        A collection of cutting-edge web applications, spanning high-end e-commerce, AI curation, and real-time incident reporting platforms.
+                    </p>
+                </motion.div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
-                            <ProjectCard key={project.title} project={project} />
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    {allProjects.map((project, index) => (
+                        <ProjectCard3D key={project.title} project={project} index={index} />
+                    ))}
+                </div>
             </div>
         </section>
     );
