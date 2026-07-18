@@ -42,7 +42,7 @@ const Skills = () => {
             <div className="absolute top-12 left-0 w-full overflow-hidden flex whitespace-nowrap pointer-events-none select-none mask-edges">
                 <div className="flex animate-marquee min-w-full">
                     {[...allSkills, ...allSkills, ...allSkills].map((item, idx) => (
-                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-900/5 tracking-tighter uppercase">
+                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-900/10 tracking-tighter uppercase">
                             {item}
                         </span>
                     ))}
@@ -53,7 +53,7 @@ const Skills = () => {
             <div className="absolute bottom-12 left-0 w-full overflow-hidden flex whitespace-nowrap pointer-events-none select-none mask-edges">
                 <div className="flex animate-marquee-reverse min-w-full">
                     {[...allSkills, ...allSkills, ...allSkills].reverse().map((item, idx) => (
-                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-900/5 tracking-tighter uppercase">
+                        <span key={idx} className="mx-4 text-4xl font-extrabold text-zinc-900/10 tracking-tighter uppercase">
                             {item}
                         </span>
                     ))}
