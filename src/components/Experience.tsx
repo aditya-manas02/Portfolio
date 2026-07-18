@@ -1,19 +1,28 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Briefcase, Calendar, Award } from 'lucide-react';
 
 const experiences = [
     {
-        title: 'Full Stack Web Developer',
-        company: 'Vigour',
-        period: 'Nov 2024 - Dec 2024',
-        description: 'Engineered a scalable health and fitness dashboard using Next.js, integrating complex state management and real-time data visualization.',
+        title: 'Java Fundamentals Trainee',
+        company: 'Skill Stones',
+        period: 'June 2025 - July 2025',
+        description: 'Completed an intensive summer training in Java Fundamentals, solidifying understanding of core programming concepts and object-oriented principles. Established a strong foundation for building robust applications.',
+        icon: <Briefcase className="w-8 h-8 text-primary group-hover:text-white transition-colors" />
     },
     {
-        title: 'AI & Web Trainee',
-        company: 'Infosys Springboard',
-        period: 'Jun 2023 - Sep 2023',
-        description: 'Developed full-stack web applications utilizing advanced AI models and cloud-native architecture principles.',
+        title: 'Participant',
+        company: 'BinaryBlitz Hackathon',
+        period: 'March 2024',
+        description: 'Competed in a fast-paced coding hackathon, focusing on building innovative tech solutions under tight deadlines.',
+        icon: <Award className="w-8 h-8 text-primary group-hover:text-white transition-colors" />
     },
+    {
+        title: 'Participant',
+        company: 'CodeOffDuty Hackathon',
+        period: 'March 2024',
+        description: 'Participated in a collaborative hackathon to develop creative software applications, collaborating with peers to solve complex problems.',
+        icon: <Award className="w-8 h-8 text-primary group-hover:text-white transition-colors" />
+    }
 ];
 
 const Experience = () => {
@@ -28,7 +37,7 @@ const Experience = () => {
                     className="text-center mb-16"
                 >
                     <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-primary mb-4">
-                        Professional Journey
+                        Training & Extracurriculars
                     </h2>
                 </motion.div>
 
@@ -43,7 +52,7 @@ const Experience = () => {
                             className="luxury-card p-8 md:p-10 flex flex-col md:flex-row gap-6 items-start group"
                         >
                             <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 group-hover:bg-primary group-hover:border-primary transition-colors shrink-0 shadow-sm">
-                                <Briefcase className="w-8 h-8 text-primary group-hover:text-white transition-colors" />
+                                {exp.icon}
                             </div>
                             <div className="flex-1">
                                 <h3 className="text-xl font-bold tracking-tight text-primary mb-1">{exp.title}</h3>

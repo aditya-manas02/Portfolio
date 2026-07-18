@@ -4,21 +4,10 @@ import { Github, ArrowUpRight } from 'lucide-react';
 
 const allProjects = [
     {
-        title: 'Emotion curator',
-        subtitle: 'AI Mood Engine',
-        description: 'AI-driven music curation based on mood. High performance React stack.',
-        tech: ['React', 'TypeScript', 'Bun', 'Vite'],
-        category: 'Full Stack',
-        link: 'https://emotion-beat-curator-bot.vercel.app/',
-        github: 'https://github.com/aditya-manas02/emotion-beat-curator-bot',
-        image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&q=80&w=800',
-        live: true,
-    },
-    {
         title: 'SafetyWatch',
-        subtitle: 'Security Platform',
-        description: 'Community security platform with real-time alerting and JWT auth.',
-        tech: ['React', 'Node.js', 'Express', 'MongoDB'],
+        subtitle: 'Community Safety & Incident Reporting',
+        description: 'A full-stack web application developed using React (Vite) and Node.js/Express to enable users to report and track neighborhood safety incidents in real time. Features secure authentication with JWT, role-based access, and Cloudinary integration for image uploads.',
+        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Cloudinary'],
         category: 'Full Stack',
         link: 'https://safetywatch.vercel.app',
         github: 'https://github.com/aditya-manas02/safetywatch-frontend',
@@ -27,10 +16,10 @@ const allProjects = [
     },
     {
         title: 'GreenConnect',
-        subtitle: 'Eco Solution',
-        description: 'Platform connecting entities for massive tree plantation drives.',
-        tech: ['PHP', 'MySQL', 'Tailwind'],
-        category: 'Backend',
+        subtitle: 'Tree Plantation Platform',
+        description: 'A full-stack web platform built to connect organizations and citizens for tree plantation initiatives. Features event creation modules and search filters by location, tree type, and date to enhance user engagement.',
+        tech: ['PHP', 'MySQL', 'Tailwind CSS', 'JavaScript', 'HTML'],
+        category: 'Full Stack',
         link: 'https://github.com/aditya-manas02/greenconnect',
         github: 'https://github.com/aditya-manas02/greenconnect',
         image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80&w=800',
@@ -38,7 +27,7 @@ const allProjects = [
     },
 ];
 
-const categories = ['All', 'Full Stack', 'Backend'];
+const categories = ['All', 'Full Stack'];
 
 const ProjectCard = ({ project }: { project: any }) => {
     return (
@@ -50,10 +39,10 @@ const ProjectCard = ({ project }: { project: any }) => {
             transition={{ duration: 0.4 }}
             className="group relative w-full"
         >
-            <div className="luxury-card relative h-[500px] sm:h-[600px] w-full overflow-hidden flex flex-col justify-between">
+            <div className="luxury-card relative h-[500px] sm:h-[650px] w-full overflow-hidden flex flex-col justify-between">
                 
                 {/* Image Area */}
-                <div className="relative h-1/2 w-full overflow-hidden border-b border-zinc-100 bg-zinc-50">
+                <div className="relative h-2/5 w-full overflow-hidden border-b border-zinc-100 bg-zinc-50 shrink-0">
                     <motion.img
                         src={project.image}
                         alt={project.title}
@@ -63,7 +52,7 @@ const ProjectCard = ({ project }: { project: any }) => {
                 </div>
 
                 {/* Content Area */}
-                <div className="p-8 h-1/2 flex flex-col justify-between bg-white z-10 relative">
+                <div className="p-8 h-3/5 flex flex-col justify-between bg-white z-10 relative">
                     <div>
                         <div className="text-accent text-xs font-semibold mb-2 tracking-wide uppercase">
                             {project.subtitle}
@@ -71,7 +60,7 @@ const ProjectCard = ({ project }: { project: any }) => {
                         <h3 className="text-2xl font-bold text-primary tracking-tight mb-3">
                             {project.title}
                         </h3>
-                        <p className="text-secondary text-sm leading-relaxed mb-6 font-normal line-clamp-3">
+                        <p className="text-secondary text-sm leading-relaxed mb-6 font-normal">
                             {project.description}
                         </p>
                     </div>

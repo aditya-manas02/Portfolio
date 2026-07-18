@@ -4,32 +4,29 @@ import { Calendar, MapPin } from 'lucide-react';
 const education = [
     {
         institution: 'Lovely Professional University',
-        degree: 'Bachelor of Technology in Computer Science',
-        period: 'Aug 2022 - Aug 2026',
-        location: 'Phagwara, Punjab',
+        degree: 'Bachelor of Technology - Computer Science and Engineering',
+        period: 'August 2023 - Present',
+        location: 'Punjab, India',
         details: [
-            'Current CGPA: 6.75',
-            'Focus on Full Stack Development and AI integration.',
+            'Current CGPA: 6.70'
         ]
     },
     {
-        institution: 'Kendriya Vidyalaya Kankarbagh',
-        degree: 'Senior Secondary (12th)',
-        period: 'Apr 2020 - Apr 2021',
-        location: 'Patna, Bihar',
+        institution: 'Jeewan Public School',
+        degree: 'Intermediate',
+        period: 'April 2020 - March 2022',
+        location: 'Motihari, Bihar',
         details: [
-            'Percentage: 75.3%',
-            'Science stream with focus on Physics, Chemistry, and Mathematics.',
+            'Percentage: 67.2%'
         ]
     },
     {
-        institution: 'Kendriya Vidyalaya Kankarbagh',
-        degree: 'Secondary (10th)',
-        period: 'Apr 2018 - Apr 2019',
-        location: 'Patna, Bihar',
+        institution: 'C. S. DAV Public School',
+        degree: 'Matriculation',
+        period: 'April 2019 - March 2020',
+        location: 'Motihari, Bihar',
         details: [
-            'Percentage: 74.5%',
-            'Foundation in core subjects.',
+            'Percentage: 71.7%'
         ]
     }
 ];
@@ -65,7 +62,7 @@ const Education = () => {
                                     <h3 className="text-xl font-bold tracking-tight text-primary mb-1">{edu.degree}</h3>
                                     <div className="text-base text-accent font-semibold">{edu.institution}</div>
                                 </div>
-                                <div className="flex flex-col gap-2 md:items-end">
+                                <div className="flex flex-col gap-2 md:items-end shrink-0">
                                     <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-50 border border-zinc-200 rounded-full text-xs text-secondary font-medium shadow-sm">
                                         <Calendar className="w-3.5 h-3.5" />
                                         {edu.period}
@@ -79,7 +76,7 @@ const Education = () => {
                             
                             <ul className="space-y-3">
                                 {edu.details.map((detail, idx) => (
-                                    <li key={idx} className="flex items-start text-secondary font-normal">
+                                    <li key={idx} className="flex items-start text-secondary font-semibold">
                                         <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 mr-3 shrink-0" />
                                         <span>{detail}</span>
                                     </li>

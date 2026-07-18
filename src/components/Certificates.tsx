@@ -3,28 +3,28 @@ import { ExternalLink, ShieldCheck } from 'lucide-react';
 
 const certificates = [
     {
-        title: 'ChatGPT-4 Prompt Engineering: ChatGPT, Generative AI & LLM',
+        title: 'ChatGPT-4 Prompt Engineering: ChatGPT Generative Al 8 LLM',
         issuer: 'Infosys Springboard',
         date: 'August 2025',
-        link: 'https://drive.google.com/file/d/17pubGZA48UolRNu-O4A250OEvWzQ2EYy/view?usp=drive_link',
+        link: '#',
     },
     {
-        title: 'Build Generative AI Apps and Solutions with No-Code Tools',
+        title: 'Build Generative Al Apps and Solutions with No-Code Tools',
         issuer: 'Infosys Springboard',
         date: 'August 2025',
-        link: 'https://drive.google.com/file/d/17pubGZA48UolRNu-O4A250OEvWzQ2EYy/view?usp=drive_link',
+        link: '#',
     },
     {
-        title: 'Master Generative AI & Generative AI tools (ChatGPT & more)',
+        title: 'Master Generative Al 8 Generative Al tools (ChatGPT 8 more)',
         issuer: 'Infosys Springboard',
         date: 'August 2025',
-        link: 'https://drive.google.com/file/d/1oyHxCcSs7DL2gLAIqzZZr-ps1h7NoLv5/view?usp=drive_link',
+        link: '#',
     },
     {
         title: 'Responsive Web Design',
-        issuer: 'FreeCodeCamp',
+        issuer: 'Freecodecamp',
         date: 'December 2023',
-        link: 'https://www.freecodecamp.org/certification/fcc53bcf556-669a-452a-8567-6e8355f35fe4/responsive-web-design',
+        link: '#',
     },
 ];
 
@@ -73,7 +73,7 @@ const Certificates = () => {
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-between px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-primary font-medium text-sm hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
                             >
-                                Verify Credential
+                                View Credential
                                 <ExternalLink className="w-4 h-4" />
                             </a>
                         </motion.div>

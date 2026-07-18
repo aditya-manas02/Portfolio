@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react';
 
 const Contact = () => {
     return (
@@ -30,7 +30,7 @@ const Contact = () => {
                         transition={{ duration: 0.6, ease: "easeOut" }}
                         className="space-y-8"
                     >
-                        <div className="luxury-card p-8 group">
+                        <div className="luxury-card p-8 group h-full">
                             <h3 className="text-2xl font-bold mb-8 text-primary">Contact Information</h3>
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
@@ -39,8 +39,8 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm text-secondary font-medium mb-1">Email</p>
-                                        <a href="mailto:contact@adityamanas.com" className="text-primary hover:text-accent transition-colors font-semibold">
-                                            contact@adityamanas.com
+                                        <a href="mailto:manasaditya7907@gmail.com" className="text-primary hover:text-accent transition-colors font-semibold break-all">
+                                            manasaditya7907@gmail.com
                                         </a>
                                     </div>
                                 </div>
@@ -50,18 +50,33 @@ const Contact = () => {
                                     </div>
                                     <div>
                                         <p className="text-sm text-secondary font-medium mb-1">Phone</p>
-                                        <a href="tel:+1234567890" className="text-primary hover:text-accent transition-colors font-semibold">
-                                            +1 (234) 567-890
+                                        <a href="tel:+919135480157" className="text-primary hover:text-accent transition-colors font-semibold">
+                                            +91-9135480157
                                         </a>
                                     </div>
                                 </div>
+                                
                                 <div className="flex items-start gap-4">
                                     <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-2xl shrink-0 group-hover:bg-primary group-hover:border-primary transition-colors shadow-sm">
-                                        <MapPin className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
+                                        <Linkedin className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
                                     </div>
                                     <div>
-                                        <p className="text-sm text-secondary font-medium mb-1">Location</p>
-                                        <p className="text-primary font-semibold">Remote / Global</p>
+                                        <p className="text-sm text-secondary font-medium mb-1">LinkedIn</p>
+                                        <a href="https://linkedin.com/in/adityamanas08/" target="_blank" rel="noreferrer" className="text-primary hover:text-accent transition-colors font-semibold">
+                                            linkedin.com/in/adityamanas08/
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4">
+                                    <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-2xl shrink-0 group-hover:bg-primary group-hover:border-primary transition-colors shadow-sm">
+                                        <Github className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm text-secondary font-medium mb-1">GitHub</p>
+                                        <a href="https://github.com/aditya-manas02" target="_blank" rel="noreferrer" className="text-primary hover:text-accent transition-colors font-semibold">
+                                            github.com/aditya-manas02
+                                        </a>
                                     </div>
                                 </div>
                             </div>

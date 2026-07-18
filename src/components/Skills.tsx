@@ -3,19 +3,19 @@ import { motion } from 'framer-motion';
 const skillCategories = [
     {
         category: 'Languages',
-        items: ['C++', 'Python', 'JavaScript', 'C', 'Java', 'PHP', 'TypeScript', 'SQL']
+        items: ['Python', 'C++', 'JavaScript', 'C', 'PHP', 'Java']
     },
     {
         category: 'Frameworks',
-        items: ['React', 'Node.js', 'Express', 'Next.js', 'Tailwind', 'Laravel', 'Bootstrap', 'Framer']
-    },
-    {
-        category: 'Databases & OS',
-        items: ['MySQL', 'MongoDB', 'PostgreSQL', 'Firebase', 'Linux', 'Ubuntu', 'Windows', 'Android']
+        items: ['HTML', 'CSS', 'Node.js', 'React', 'Tailwind CSS']
     },
     {
         category: 'Tools & Platforms',
-        items: ['Git', 'GitHub', 'VS Code', 'Vercel', 'Postman', 'Render', 'Canva', 'Figma']
+        items: ['MySQL', 'MongoDB', 'Linux', 'Git', 'GitHub', 'Vercel']
+    },
+    {
+        category: 'Soft Skills',
+        items: ['Problem-Solving', 'Leadership', 'Teamwork', 'Time Management', 'Adaptability']
     }
 ];
 
