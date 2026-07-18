@@ -16,7 +16,7 @@ const experiences = [
         title: 'BinaryBlitz Hackathon',
         organization: 'Participant',
         period: 'March 2024',
-        achievement: '🏆 Achieved Top 10 out of 300 Teams',
+        achievement: 'ACHIEVED: Top 10 out of 300 Teams',
         description: 'Collaborated with a team to solve complex problems under time constraints.',
         icon: <Award className="w-5 h-5" />,
     },
@@ -25,7 +25,7 @@ const experiences = [
         title: 'CodeOffDuty Hackathon',
         organization: 'Participant',
         period: 'March 2024',
-        achievement: '🏆 Achieved Top 15 out of 200 Teams',
+        achievement: 'ACHIEVED: Top 15 out of 200 Teams',
         description: 'Engaged in competitive coding and creative problem solving.',
         icon: <Award className="w-5 h-5" />,
     },
@@ -33,60 +33,67 @@ const experiences = [
 
 const Experience = () => {
     return (
-        <section id="experience" className="py-24 relative overflow-hidden">
+        <section id="experience" className="py-24 bg-black relative overflow-hidden border-y-2 border-white/20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-left mb-16 border-b-4 border-white pb-6"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Journey & <span className="text-[#ccff00]">Experience</span></h2>
-                    <div className="w-20 h-1.5 bg-[#ccff00] text-black mx-auto " />
+                    <span className="font-mono-tech text-[#ccff00] text-sm tracking-widest block mb-2">/* TIMELINE_LOG */</span>
+                    <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter">Experience</h2>
                 </motion.div>
 
                 <div className="relative">
                     {/* Vertical Line */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-secondary/50 to-transparent md:-translate-x-1/2" />
+                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-white/20 md:-translate-x-1/2" />
 
                     <div className="space-y-12">
                         {experiences.map((exp, index) => (
                             <div key={index} className="relative flex flex-col md:flex-row items-center">
                                 {/* Timeline Dot Desktop */}
-                                <div className="absolute left-1/2 w-4 h-4  bg-[#ccff00] text-black shadow-[0_0_15px_rgba(14,165,233,0.8)] z-10 -translate-x-1/2 hidden md:block" />
+                                <div className="absolute left-1/2 w-4 h-4 bg-[#ccff00] z-10 -translate-x-1/2 hidden md:block brutalist-border" />
 
                                 <div className={`w-full md:w-1/2 flex ${index % 2 === 0 ? 'md:justify-end md:pr-16' : 'md:justify-start md:pl-16 md:ml-auto'}`}>
                                     <motion.div
                                         initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
-                                        className="brutalist-border bg-black p-6 sm:p-8 -[2rem] w-full hover:bg-white/[0.08] transition-all group relative border-white/10 ml-8 md:ml-0"
+                                        className="brutalist-border bg-[#0a0a0a] p-8 w-full hover:bg-[#111] transition-all group relative ml-8 md:ml-0"
                                     >
                                         {/* Mobile Dot */}
-                                        <div className="absolute top-10 -left-[22px] w-3 h-3  bg-[#ccff00] text-black md:hidden ring-4 ring-primary/20" />
+                                        <div className="absolute top-10 -left-[22px] w-4 h-4 bg-[#ccff00] brutalist-border md:hidden" />
 
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="p-2  bg-[#ccff00] text-black/20 text-[#ccff00] group-hover:scale-110 transition-transform">
-                                                {exp.icon}
+                                        <div className="flex items-center justify-between mb-6 border-b-2 border-white/10 pb-4">
+                                            <div className="flex items-center gap-3">
+                                                <div className="p-2 bg-white text-black brutalist-border group-hover:bg-[#ccff00] transition-colors">
+                                                    {exp.icon}
+                                                </div>
+                                                <span className="font-mono-tech text-xs font-bold text-white uppercase tracking-widest bg-white/10 px-2 py-1">
+                                                    [{exp.type}]
+                                                </span>
                                             </div>
-                                            <span className="text-xs font-bold text-[#ccff00] uppercase tracking-widest">{exp.type}</span>
+                                            <div className="flex items-center gap-2 font-mono-tech text-xs text-[#ccff00]">
+                                                <Calendar className="w-3.5 h-3.5" />
+                                                {exp.period}
+                                            </div>
                                         </div>
 
-                                        <h3 className="text-xl sm:text-2xl font-bold mb-1 text-white group-hover:text-[#ccff00] transition-colors">{exp.title}</h3>
-                                        <p className="text-gray-300 font-semibold mb-3 text-sm sm:text-base">{exp.organization}</p>
+                                        <h3 className="text-2xl font-black uppercase tracking-tighter mb-2 text-white group-hover:text-[#ccff00] transition-colors">
+                                            {exp.title}
+                                        </h3>
+                                        <p className="font-mono-tech text-[#ccff00] text-sm mb-6 uppercase">
+                                            &gt; {exp.organization}
+                                        </p>
 
-                                        <div className="flex items-center gap-2 text-xs text-gray-400 mb-4 bg-white/5 py-1 px-3  w-fit">
-                                            <Calendar className="w-3.5 h-3.5" />
-                                            {exp.period}
-                                        </div>
-
-                                        <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 group-hover:text-gray-200 transition-colors">
+                                        <p className="text-white/70 font-mono-tech text-sm leading-relaxed mb-6">
                                             {exp.description}
                                         </p>
 
                                         {exp.achievement && (
-                                            <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 border border-yellow-500/30  shadow-[0_0_20px_rgba(234,179,8,0.15)] group-hover:shadow-[0_0_25px_rgba(234,179,8,0.3)] transition-all">
-                                                <span className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 tracking-wide">
+                                            <div className="mb-6 w-full brutalist-border bg-black border-2 border-[#ccff00] p-3 text-center">
+                                                <span className="font-mono-tech text-xs font-bold text-[#ccff00] uppercase tracking-wider">
                                                     {exp.achievement}
                                                 </span>
                                             </div>
@@ -94,7 +101,7 @@ const Experience = () => {
 
                                         {exp.tech && (
                                             <div className="flex flex-wrap gap-2">
-                                                <span className="px-4 py-1.5  bg-[#ccff00] text-black/10 text-[10px] font-bold text-[#ccff00] border border-primary/20">
+                                                <span className="px-3 py-1 bg-white text-black font-mono-tech text-[10px] font-black uppercase brutalist-border">
                                                     {exp.tech}
                                                 </span>
                                             </div>

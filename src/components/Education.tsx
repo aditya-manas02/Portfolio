@@ -30,16 +30,16 @@ const education = [
 
 const Education = () => {
     return (
-        <section id="education" className="py-24 bg-white/[0.01]">
+        <section id="education" className="py-24 bg-background relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-left mb-16 border-b-4 border-white pb-6"
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold mb-4">Academic <span className="text-[#ccff00]">Background</span></h2>
-                    <div className="w-20 h-1.5 bg-[#ccff00] text-black mx-auto " />
+                    <span className="font-mono-tech text-[#ccff00] text-sm tracking-widest block mb-2">/* ACADEMY_DB */</span>
+                    <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter">Academic</h2>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -50,32 +50,32 @@ const Education = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="brutalist-border bg-black p-8 -[2.5rem] hover:bg-white/[0.05] transition-all group border-white/5 relative overflow-hidden"
+                            className="brutalist-border bg-black p-8 hover:bg-[#111] transition-colors group relative flex flex-col justify-between min-h-[400px]"
                         >
-                            {/* Decorative background element */}
-                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#ccff00] text-black/5 blur-3xl  group-hover:bg-[#ccff00] text-black/10 transition-colors" />
-
-                            <div className="flex flex-col items-center text-center">
-                                <div className="w-28 h-28 p-4  bg-white/10 mb-6 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    <img src={edu.logo} alt={edu.institution} className="max-w-[85%] max-h-[85%] object-contain filter drop-shadow-2xl relative z-10" />
+                            <div className="flex flex-col items-start">
+                                <div className="w-20 h-20 bg-white p-2 mb-8 group-hover:-translate-y-2 group-hover:translate-x-2 transition-transform duration-300 brutalist-border">
+                                    <img src={edu.logo} alt={edu.institution} className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all" />
                                 </div>
 
-                                <h3 className="text-xl font-bold mb-2 group-hover:text-[#ccff00] transition-colors line-clamp-2 min-h-[3.5rem] flex items-center justify-center">{edu.institution}</h3>
-                                <p className="text-gray-300 font-semibold mb-4 text-sm px-2 bg-white/5 py-1 ">{edu.degree}</p>
+                                <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 text-white group-hover:text-[#ccff00] transition-colors line-clamp-2">
+                                    {edu.institution}
+                                </h3>
+                                <p className="text-white/70 font-mono-tech text-sm mb-6 border-l-2 border-[#ccff00] pl-3">
+                                    {edu.degree}
+                                </p>
+                            </div>
 
-                                <div className="space-y-3 w-full border-t border-white/10 pt-4">
-                                    <div className="flex items-center justify-center gap-2 text-gray-400 text-sm">
-                                        <Calendar className="w-4 h-4 text-[#ccff00]" />
-                                        {edu.period}
-                                    </div>
-                                    <div className="flex items-center justify-center gap-2 text-gray-400 text-sm">
-                                        <MapPin className="w-4 h-4 text-[#ccff00]" />
-                                        {edu.location}
-                                    </div>
-                                    <div className="mt-4 inline-block px-4 py-2  bg-[#ccff00] text-black/10 text-[#ccff00] font-black text-sm border border-primary/20">
-                                        {edu.status}
-                                    </div>
+                            <div className="space-y-4 w-full border-t-2 border-white/20 pt-6 mt-6">
+                                <div className="flex items-center gap-3 font-mono-tech text-white/50 text-xs">
+                                    <Calendar className="w-4 h-4 text-[#ccff00]" />
+                                    {edu.period}
+                                </div>
+                                <div className="flex items-center gap-3 font-mono-tech text-white/50 text-xs">
+                                    <MapPin className="w-4 h-4 text-[#ccff00]" />
+                                    {edu.location}
+                                </div>
+                                <div className="mt-4 w-full text-center py-3 bg-[#ccff00] text-black font-black uppercase text-sm brutalist-border">
+                                    {edu.status}
                                 </div>
                             </div>
                         </motion.div>
