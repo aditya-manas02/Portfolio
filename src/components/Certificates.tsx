@@ -3,29 +3,107 @@ import { ExternalLink, ShieldCheck } from 'lucide-react';
 
 const certificates = [
     {
-        title: 'ChatGPT-4 Prompt Engineering: ChatGPT Generative Al 8 LLM',
-        issuer: 'Infosys Springboard',
-        date: 'August 2025',
+        title: 'Packet Switching Networks and Algorithms',
+        issuer: 'University of Colorado Boulder',
+        date: 'Sep 2024',
         link: '#',
     },
     {
-        title: 'Build Generative Al Apps and Solutions with No-Code Tools',
-        issuer: 'Infosys Springboard',
-        date: 'August 2025',
+        title: 'TCP/IP and Advanced Topics',
+        issuer: 'University of Colorado Boulder',
+        date: 'Nov 2024',
         link: '#',
     },
     {
-        title: 'Master Generative Al 8 Generative Al tools (ChatGPT 8 more)',
+        title: 'Fundamentals of Network Communication',
+        issuer: 'University of Colorado Boulder',
+        date: 'Nov 2024',
+        link: '#',
+    },
+    {
+        title: 'Computer Communications',
+        issuer: 'University of Colorado Boulder',
+        date: 'Nov 2024',
+        link: '#',
+    },
+    {
+        title: 'Peer-to-Peer Protocols and Local Area Networks',
+        issuer: 'University of Colorado Boulder',
+        date: 'Oct 2024',
+        link: '#',
+    },
+    {
+        title: 'The Bits and Bytes of Computer Networking',
+        issuer: 'Google',
+        date: 'Sep 2024',
+        link: '#',
+    },
+    {
+        title: 'Digital Systems: From Logic Gates to Processors',
+        issuer: 'Universitat Autònoma de Barcelona',
+        date: 'Oct 2024',
+        link: '#',
+    },
+    {
+        title: 'Introduction to Hardware and Operating Systems',
+        issuer: 'IBM',
+        date: 'Sep 2024',
+        link: '#',
+    },
+    {
+        title: 'Cracking the Coding Interview',
         issuer: 'Infosys Springboard',
-        date: 'August 2025',
+        date: 'Sep 2024',
+        link: '#',
+    },
+    {
+        title: 'Master Generative AI & Converging AI tools (ChatGPT & more)',
+        issuer: 'Infosys Springboard',
+        date: 'Aug 2024',
+        link: '#',
+    },
+    {
+        title: 'Computational Theory: Language Principle & Finite Automata Theory',
+        issuer: 'Infosys Springboard',
+        date: 'Aug 2024',
+        link: '#',
+    },
+    {
+        title: 'ChatGPT Prompt Engineering: ChatGPT, Generative AI & LLM',
+        issuer: 'Infosys Springboard',
+        date: 'Aug 2024',
+        link: '#',
+    },
+    {
+        title: 'Build Generative AI Apps and Solutions with No-Code Tools',
+        issuer: 'Infosys Springboard',
+        date: 'Aug 2024',
+        link: '#',
+    },
+    {
+        title: 'Java Fundamentals',
+        issuer: 'Oracle',
+        date: 'Aug 2023',
+        link: '#',
+    },
+    {
+        title: 'Introduction to Internet of Things',
+        issuer: 'NPTEL',
+        date: 'Oct 2023',
+        link: '#',
+    },
+    {
+        title: 'HackerRank Certificate',
+        issuer: 'HackerRank',
+        date: 'Nov 2023',
         link: '#',
     },
     {
         title: 'Responsive Web Design',
-        issuer: 'Freecodecamp',
-        date: 'December 2023',
+        issuer: 'freeCodeCamp',
+        date: 'Nov 2023',
         link: '#',
-    },
+    }
 ];
 
 const Certificates = () => {
