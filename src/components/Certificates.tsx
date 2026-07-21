@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 const certificates = [
     {
@@ -145,15 +145,6 @@ const Certificates = () => {
                                 <p className="text-xs text-secondary font-medium">{cert.date}</p>
                             </div>
 
-                            <a
-                                href={cert.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-between px-4 py-3 bg-zinc-50 border border-zinc-200 rounded-xl text-primary font-medium text-sm hover:bg-primary hover:text-white hover:border-primary transition-all shadow-sm"
-                            >
-                                View Credential
-                                <ExternalLink className="w-4 h-4" />
-                            </a>
                         </motion.div>
                     ))}
                 </div>
